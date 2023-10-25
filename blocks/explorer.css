@@ -1,0 +1,56 @@
+.explorer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.explorer__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+
+.explorer__info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex-grow: 1;
+}
+
+.explorer__name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.explorer__name {
+    font-size: 42px;
+    line-height: 48px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.explorer__edit-button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.explorer__description {
+    margin: 0;
+}
+
+.explorer__add-button {
+    width: 150px;
+    height: 50px;
+    border: solid 2px #fff;
+    border-radius: 2px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
