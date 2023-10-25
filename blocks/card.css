@@ -31,12 +31,16 @@
     font-size: 24px;
     font-weight: 900;
     line-height: 29px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .card__fav-icon {
     background-image: url(../images/fav-icon.svg);
     width: 21px;
     height: 18px;
+    flex-shrink: 0;
 }
 
 .card__fav-icon:hover {
