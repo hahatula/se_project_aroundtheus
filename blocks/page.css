@@ -1,23 +1,23 @@
 .page {
-    display: block;
-    color: #fff;
-    font-family: "Inter";
-    font-size: 18px;
-    font-weight: 400;
-    box-sizing: border-box;
-    margin: 0 auto;
-    min-height: 100vh;
-    max-width: 80%;
+  display: block;
+  color: #fff;
+  font-family: "Inter";
+  font-size: 18px;
+  font-weight: 400;
+  box-sizing: border-box;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 80%;
 }
 
-@media screen and (max-width:1100px) {
-    .page {
-        max-width: 90%;
-    }
+@media screen and (max-width: 1100px) {
+  .page {
+    max-width: 90%;
+  }
 }
 
-@media screen and (max-width:920px) {
-    .page {
-        max-width: 100%;
-    }
+@media screen and (max-width: 920px) {
+  .page {
+    max-width: 100%;
+  }
 }

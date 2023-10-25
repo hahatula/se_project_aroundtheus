@@ -1,84 +1,84 @@
 .explorer {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: space-between;
 }
 
 .explorer__photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 100%;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
 }
 
 .explorer__info {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex-grow: 1;
 }
 
 .explorer__name-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .explorer__name {
-    font-size: 42px;
-    line-height: 1.14;
-    font-weight: 500;
-    margin: 0;
+  font-size: 42px;
+  line-height: 1.14;
+  font-weight: 500;
+  margin: 0;
 }
 
 .explorer__edit-button {
-    width: 24px;
-    height: 24px;
-    border: 1px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .explorer__edit-button:hover {
-    opacity: .6;
+  opacity: 0.6;
 }
 
 .explorer__description {
-    margin: 0;
+  margin: 0;
 }
 
 .explorer__add-button {
-    width: 150px;
-    height: 50px;
-    border: solid 2px #fff;
-    border-radius: 2px;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 150px;
+  height: 50px;
+  border: solid 2px #fff;
+  border-radius: 2px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .explorer__add-button:hover {
-    opacity: .6;
+  opacity: 0.6;
 }
 
-@media screen and (max-width:920px) {
-    .explorer {
-        flex-direction: column;
-        justify-content: center;
-    }
+@media screen and (max-width: 920px) {
+  .explorer {
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    .explorer__name {
-        font-size: 22px;
-    }
+  .explorer__name {
+    font-size: 22px;
+  }
 
-    .explorer__description {
-       text-align: center;
-       font-size: 14px;
-    }
+  .explorer__description {
+    text-align: center;
+    font-size: 14px;
+  }
 
-    .explorer__add-button {
-        width: 100%;
-    }
+  .explorer__add-button {
+    width: 100%;
+  }
 }

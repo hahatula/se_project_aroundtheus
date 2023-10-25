@@ -1,9 +1,9 @@
 .content {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 920px) {
-    .content {
-        margin: 0 19px;
-    }
+  .content {
+    margin: 0 19px;
+  }
 }
