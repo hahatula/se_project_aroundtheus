@@ -12,7 +12,7 @@ A responsive web page with a list of the explorer's travels.
 
 **Images**  
 
-[lago](https://github.com/hahatula/se_project_aroundtheus/assets/77620928/def9a165-cc62-438a-a95e-1a7c40344fc6)
+![lago](https://github.com/hahatula/se_project_aroundtheus/assets/77620928/def9a165-cc62-438a-a95e-1a7c40344fc6)
 
 
 **Link**
