@@ -26,7 +26,7 @@
 
 .explorer__name {
     font-size: 42px;
-    line-height: 48px;
+    line-height: 1.14;
     font-weight: 500;
     margin: 0;
 }
@@ -38,6 +38,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.explorer__edit-button:hover {
+    opacity: .6;
 }
 
 .explorer__description {
@@ -53,4 +57,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.explorer__add-button:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width:920px) {
+    .explorer {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .explorer__name {
+        font-size: 22px;
+    }
+
+    .explorer__description {
+       text-align: center;
+       font-size: 14px;
+    }
+
+    .explorer__add-button {
+        width: 100%;
+    }
 }

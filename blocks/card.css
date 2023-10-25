@@ -38,3 +38,7 @@
     width: 21px;
     height: 18px;
 }
+
+.card__fav-icon:hover {
+    opacity: .5;
+}
