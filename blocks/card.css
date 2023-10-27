@@ -1,5 +1,4 @@
 .card {
-  height: 361px;
   min-width: 282px;
   max-width: 100%;
   list-style: none;
@@ -41,6 +40,10 @@
   width: 21px;
   height: 18px;
   flex-shrink: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
 }
 
 .card__fav-icon:hover {

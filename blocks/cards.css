@@ -1,4 +1,4 @@
-.cards {
+.cards__list {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
@@ -6,4 +6,10 @@
   justify-content: space-between;
   margin: 51px 0;
   padding: 0;
+}
+
+@media screen and (max-width: 920px) {
+  .cards__list {
+    margin: 36px 0;
+  }
 }

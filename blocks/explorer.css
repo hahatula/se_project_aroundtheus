@@ -16,11 +16,12 @@
   flex-direction: column;
   gap: 7px;
   flex-grow: 1;
+  max-width: calc(100% - 120px - 150px - 60px);
 }
 
 .explorer__name-wrapper {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 18px;
 }
 
@@ -29,15 +30,25 @@
   line-height: 1.14;
   font-weight: 500;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .explorer__edit-button {
   width: 24px;
   height: 24px;
-  border: 1px solid #fff;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  background-image: url(../images/edit-button.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.3s linear;
 }
 
 .explorer__edit-button:hover {
@@ -46,6 +57,9 @@
 
 .explorer__description {
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .explorer__add-button {
@@ -53,32 +67,52 @@
   height: 50px;
   border: solid 2px #fff;
   border-radius: 2px;
-  background-color: #000;
+  background-color: transparent;
+  background-image: url(../images/Plus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: opacity 0.3s linear;
 }
 
 .explorer__add-button:hover {
   opacity: 0.6;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 618px) {
   .explorer {
     flex-direction: column;
     justify-content: center;
+  }
+
+  .explorer__info {
+    max-width: 100%;
+  }
+
+  .explorer__name-wrapper {
+    gap: 10px;
   }
 
   .explorer__name {
     font-size: 22px;
   }
 
+  .explorer__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+
   .explorer__description {
     text-align: center;
-    font-size: 14px;
   }
 
   .explorer__add-button {
     width: 100%;
+    background-size: 16px;
   }
 }
