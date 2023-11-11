@@ -25,7 +25,7 @@
   position: relative;
 }
 
-.form__close {
+.modal__close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -40,7 +40,7 @@
   transition: opacity 0.3s linear;
 }
 
-.form__close:hover {
+.modal__close:hover {
   opacity: 0.6;
 }
 
@@ -51,7 +51,7 @@
         padding: 25px 22px;
     }
 
-    .form__close {
+    .modal__close {
         right: 8px;
         width: 22px;
         height: 22px;
