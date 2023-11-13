@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-.modal--closed {
+.modal_closed {
     display: none;
 }
 

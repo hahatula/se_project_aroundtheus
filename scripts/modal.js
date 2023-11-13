@@ -3,7 +3,7 @@ let editBtn = document.querySelector(".explorer__edit-button");
 let closeBtn = document.querySelector(".modal__close-btn");
 
 function controlModalWindow() {
-  modalWindow.classList.toggle("modal--closed");
+  modalWindow.classList.toggle("modal_closed");
 }
 
 editBtn.addEventListener("click", controlModalWindow);
