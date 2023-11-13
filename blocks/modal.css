@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+.modal--closed {
+    display: none;
+}
+
 .modal__container {
   display: block;
   width: 430px;
@@ -25,7 +29,7 @@
   position: relative;
 }
 
-.modal__close {
+.modal__close-btn {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -40,7 +44,7 @@
   transition: opacity 0.3s linear;
 }
 
-.modal__close:hover {
+.modal__close-btn:hover {
   opacity: 0.6;
 }
 
