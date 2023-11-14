@@ -9,15 +9,15 @@ let inputAbout = modalWindow.querySelector(".form__input_about");
 
 function controlModalWindow() {
   modalWindow.classList.toggle("modal_closed");
-    inputName.value = profileName.textContent;
-    inputAbout.value = profileAbout.textContent;
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
 }
 
 function saveChanges(e) {
-    e.preventDefault();
-    profileName.textContent = inputName.value;
-    profileAbout.textContent = inputAbout.value;
-    modalWindow.classList.toggle("modal_closed");
+  e.preventDefault();
+  profileName.textContent = inputName.value;
+  profileAbout.textContent = inputAbout.value;
+  controlModalWindow();
 }
 
 editBtn.addEventListener("click", controlModalWindow);
