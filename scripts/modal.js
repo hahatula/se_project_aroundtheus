@@ -1,7 +1,6 @@
 const modalWindow = document.querySelector(".modal");
 const editBtn = document.querySelector(".explorer__edit-button");
 const closeBtn = document.querySelector(".modal__close-btn");
-// const submitBtn = modalWindow.querySelector(".form__submit");
 const form = modalWindow.querySelector(".form");
 let profileName = document.querySelector(".explorer__name");
 let profileAbout = document.querySelector(".explorer__description");
@@ -25,4 +24,5 @@ function saveChanges(e) {
 
 editBtn.addEventListener("click", controlModalWindow);
 closeBtn.addEventListener("click", controlModalWindow);
+form.addEventListener("submit", saveChanges);
 form.addEventListener("submit", saveChanges);
