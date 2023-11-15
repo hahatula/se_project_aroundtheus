@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -26,18 +26,33 @@ let initialCards = [
 ];
 
 const cardsList = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+
+// function getCardElement(data) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImage = cardElement.querySelector(".card__image");
+//   cardImage.src = initialCards[i].link;
+//   cardImage.alt = initialCards[i].name;
+//   cardElement.querySelector(".card__title-text").textContent =
+//     initialCards[1].name;
+//   cardsList.prepend(cardElement);
+//}
 
 function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector(".card__image").src = initialCards[i].link;
-  cardElement.querySelector(".card__image").alt = initialCards[i].name;
-  cardElement.querySelector(".card__title-text").textContent =
-    initialCards[i].name;
-  cardsList.prepend(cardElement);
-}
+    const cardElement = cardTemplate.cloneNode(true);
+    const cardImage = cardElement.querySelector(".card__image");
+    cardImage.src = data.link;
+    cardImage.alt = data.name;
+    cardElement.querySelector(".card__title-text").textContent =
+      data.name;
+    cardsList.prepend(cardElement);
+  }
 
-for (i = 0; i < initialCards.length; i++) {
-    getCardElement();
-} 
+// for (i = 0; i < initialCards.length; i++) {
+//   getCardElement();
+// }
 
+initialCards.forEach(element => {
+    getCardElement(element);
+});

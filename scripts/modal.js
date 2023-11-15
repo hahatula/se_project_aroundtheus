@@ -8,9 +8,11 @@ let inputName = modalWindow.querySelector(".form__input_name");
 let inputAbout = modalWindow.querySelector(".form__input_about");
 
 function controlModalWindow() {
-  modalWindow.classList.toggle("modal_closed");
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+  modalWindow.classList.toggle("modal_opened");
+  if (modalWindow.classList.contains("modal_opened")) {
+    inputName.value = profileName.textContent;
+    inputAbout.value = profileAbout.textContent;
+  }
 }
 
 function saveChanges(e) {
