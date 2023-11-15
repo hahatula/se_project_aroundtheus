@@ -25,4 +25,3 @@ function saveChanges(e) {
 editBtn.addEventListener("click", controlModalWindow);
 closeBtn.addEventListener("click", controlModalWindow);
 form.addEventListener("submit", saveChanges);
-form.addEventListener("submit", saveChanges);
