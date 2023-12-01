@@ -1,3 +1,5 @@
+// import newCard from "./modal";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
