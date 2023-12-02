@@ -2,10 +2,12 @@ const modalWindow = document.querySelector(".modal");
 const modalIsOpenedClassName = "modal_opened";
 const profileEditWindow = document.querySelector(".modal_type_profile");
 const addCardWindow = document.querySelector(".modal_type_add-card");
+const showImageWindow = document.querySelector(".modal_type_show-image");
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
 const closeBtnProfileEditWindow = profileEditWindow.querySelector(".modal__close-btn");
 const closeBtnAddCardWindow = addCardWindow.querySelector(".modal__close-btn");
+const closeBtnShowImageWindow = showImageWindow.querySelector(".modal__close-btn");
 const profileForm = profileEditWindow.querySelector(".form");
 const addCardForm = addCardWindow.querySelector(".form");
 let profileName = document.querySelector(".explorer__name");
@@ -60,6 +62,9 @@ addBtn.addEventListener("click", () => {
 });
 closeBtnAddCardWindow.addEventListener("click", () => {
   controlModalWindows(addCardWindow);
+});
+closeBtnShowImageWindow.addEventListener("click", () => {
+  controlModalWindows(showImageWindow);
 });
 profileForm.addEventListener("submit", saveChanges);
 addCardForm.addEventListener("submit", saveChanges);

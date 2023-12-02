@@ -28,6 +28,7 @@ const initialCards = [
 const cardsList = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
+// const showImageTemplate = document.querySelector("#show-image-template").content.firstElementChild;
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -35,17 +36,27 @@ function getCardElement(data) {
   const cardTitle = cardElement.querySelector(".card__title-text");
   const cardLikeIcon = cardElement.querySelector(".card__fav-icon");
   const cardTrashIcon = cardElement.querySelector(".card__trash-icon");
-  console.log(cardTrashIcon);
+  const showImage = document.querySelector(".modal_type_show-image");
+  const modalImage = showImage.querySelector(".modal__image");
+  const modalImageLable = showImage.querySelector(".modal__image-lable");
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
+
   cardLikeIcon.addEventListener("click", () => {
     cardLikeIcon.classList.toggle("card__fav-icon_active");
   });
   cardTrashIcon.addEventListener("click", () => {
     cardElement.remove();
   });
+  cardImage.addEventListener("click", () => {
+    controlModalWindows(showImageWindow);
+    modalImage.src = data.link;
+    modalImage.alt = data.name;
+    modalImageLable.textContent = data.name;
+  });
+
   cardsList.prepend(cardElement);
 }
 

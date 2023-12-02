@@ -29,6 +29,25 @@
   position: relative;
 }
 
+.modal__image-wrapper {
+  max-width: 75vw;
+  max-height: 75vh;
+  /* max-width: 880px; */
+  /* margin: 90px 40px; */
+  position: relative;
+}
+
+.modal__image {
+  width: 100%;
+  object-fit: contain;
+}
+
+.modal__image-lable {
+  margin: 10px auto 0 0;
+  color: #fff;
+  font-size: 12px;
+}
+
 .modal__close-btn {
   position: absolute;
   top: -40px;
