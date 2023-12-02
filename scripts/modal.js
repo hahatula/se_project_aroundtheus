@@ -5,9 +5,11 @@ const addCardWindow = document.querySelector(".modal_type_add-card");
 const showImageWindow = document.querySelector(".modal_type_show-image");
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
-const closeBtnProfileEditWindow = profileEditWindow.querySelector(".modal__close-btn");
+const closeBtnProfileEditWindow =
+  profileEditWindow.querySelector(".modal__close-btn");
 const closeBtnAddCardWindow = addCardWindow.querySelector(".modal__close-btn");
-const closeBtnShowImageWindow = showImageWindow.querySelector(".modal__close-btn");
+const closeBtnShowImageWindow =
+  showImageWindow.querySelector(".modal__close-btn");
 const profileForm = profileEditWindow.querySelector(".form");
 const addCardForm = addCardWindow.querySelector(".form");
 let profileName = document.querySelector(".explorer__name");
@@ -43,11 +45,11 @@ function saveChanges(e) {
   }
 }
 
-function createNewCard (newName, newLink) {
-  newCard =  {
+function createNewCard(newName, newLink) {
+  newCard = {
     name: newName,
-    link: newLink
-  }
+    link: newLink,
+  };
   return newCard;
 }
 

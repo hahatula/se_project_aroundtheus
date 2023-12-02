@@ -51,10 +51,10 @@ function getCardElement(data) {
     cardElement.remove();
   });
   cardImage.addEventListener("click", () => {
-    controlModalWindows(showImageWindow);
     modalImage.src = data.link;
     modalImage.alt = data.name;
     modalImageLable.textContent = data.name;
+    controlModalWindows(showImageWindow);
   });
 
   cardsList.prepend(cardElement);
