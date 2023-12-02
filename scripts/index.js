@@ -34,12 +34,17 @@ function getCardElement(data) {
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title-text");
   const cardLikeIcon = cardElement.querySelector(".card__fav-icon");
+  const cardTrashIcon = cardElement.querySelector(".card__trash-icon");
+  console.log(cardTrashIcon);
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
   cardLikeIcon.addEventListener("click", () => {
     cardLikeIcon.classList.toggle("card__fav-icon_active");
+  });
+  cardTrashIcon.addEventListener("click", () => {
+    cardElement.remove();
   });
   cardsList.prepend(cardElement);
 }
