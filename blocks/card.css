@@ -8,6 +8,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card__image {
@@ -35,21 +36,35 @@
   overflow: hidden;
 }
 
-.card__fav-icon {
-  background-image: url(../images/fav-icon.svg);
-  width: 21px;
-  height: 18px;
-  flex-shrink: 0;
+.card__fav-icon,
+.card__trash-icon {
   border: none;
   background-color: transparent;
   cursor: pointer;
   transition: opacity 0.3s linear;
 }
 
-.card__fav-icon:hover {
+.card__fav-icon:hover,
+.card__trash-icon:hover {
   opacity: 0.5;
+}
+
+.card__fav-icon {
+  background-image: url(../images/fav-icon.svg);
+  width: 21px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .card__fav-icon_active {
   background-image: url(../images/fav-icon-filled.svg);
+}
+
+.card__trash-icon {
+  background-image: url(../images/trash.svg);
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  top: 18px;
+  right: 15px;
 }
