@@ -32,9 +32,15 @@ const cardTemplate =
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
+  const cardTitle = cardElement.querySelector(".card__title-text");
+  const cardLikeIcon = cardElement.querySelector(".card__fav-icon");
+
   cardImage.src = data.link;
   cardImage.alt = data.name;
-  cardElement.querySelector(".card__title-text").textContent = data.name;
+  cardTitle.textContent = data.name;
+  cardLikeIcon.addEventListener("click", () => {
+    cardLikeIcon.classList.toggle("card__fav-icon_active");
+  });
   cardsList.prepend(cardElement);
 }
 
