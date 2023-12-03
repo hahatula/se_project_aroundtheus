@@ -54,7 +54,7 @@ function getCardElement(data) {
     modalImage.src = data.link;
     modalImage.alt = data.name;
     modalImageLable.textContent = data.name;
-    controlModalWindows(showImageWindow);
+    openPopup(showImageWindow);
   });
 
   cardsList.prepend(cardElement);

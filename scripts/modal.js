@@ -9,8 +9,8 @@ const closeBtnProfileEditWindow =
 const closeBtnAddCardWindow = addCardWindow.querySelector(".modal__close-btn");
 const closeBtnShowImageWindow =
   showImageWindow.querySelector(".modal__close-btn");
-const profileForm = profileEditWindow.querySelector(".form");
-const addCardForm = addCardWindow.querySelector(".form");
+const profileForm = document.forms["profile-form"];
+const addCardForm = document.forms["card-form"];
 const profileName = document.querySelector(".explorer__name");
 const profileAbout = document.querySelector(".explorer__description");
 const inputName = profileEditWindow.querySelector(".form__input_name");
@@ -18,29 +18,30 @@ const inputAbout = profileEditWindow.querySelector(".form__input_about");
 const inputTitle = addCardWindow.querySelector(".form__input_title");
 const inputImgLink = addCardWindow.querySelector(".form__input_image-link");
 
-function controlModalWindows(modal) {
-  modal.classList.toggle(modalIsOpenedClassName);
-  if (modal.classList.contains(modalIsOpenedClassName)) {
-    inputName.value = profileName.textContent;
-    inputAbout.value = profileAbout.textContent;
-    inputTitle.value = "";
-    inputImgLink.value = "";
-  }
+function openPopup(popup) {
+  popup.classList.add(modalIsOpenedClassName);
 }
 
-function saveChanges(e) {
+function closePopup(popup) {
+  popup.classList.remove(modalIsOpenedClassName);
+}
+
+function saveProfileChanges(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  if (profileEditWindow.classList.contains(modalIsOpenedClassName)) {
-    controlModalWindows(profileEditWindow);
-  } else if (addCardWindow.classList.contains(modalIsOpenedClassName)) {
-    newName = inputTitle.value;
-    newLink = inputImgLink.value;
-    createNewCard(newName, newLink);
-    getCardElement(newCard); //this function is created in index.js
-    addCardWindow.classList.toggle(modalIsOpenedClassName);
-  }
+  closePopup(profileEditWindow);
+}
+
+function saveNewCard(e) {
+  e.preventDefault();
+  newName = inputTitle.value;
+  newLink = inputImgLink.value;
+  createNewCard(newName, newLink);
+  getCardElement(newCard); //this function is created in index.js
+  closePopup(addCardWindow);
+  inputTitle.value = "";
+  inputImgLink.value = "";
 }
 
 function createNewCard(newName, newLink) {
@@ -52,19 +53,21 @@ function createNewCard(newName, newLink) {
 }
 
 editBtn.addEventListener("click", () => {
-  controlModalWindows(profileEditWindow);
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
+  openPopup(profileEditWindow);
 });
 closeBtnProfileEditWindow.addEventListener("click", () => {
-  controlModalWindows(profileEditWindow);
+  closePopup(profileEditWindow);
 });
 addBtn.addEventListener("click", () => {
-  controlModalWindows(addCardWindow);
+  openPopup(addCardWindow);
 });
 closeBtnAddCardWindow.addEventListener("click", () => {
-  controlModalWindows(addCardWindow);
+  closePopup(addCardWindow);
 });
 closeBtnShowImageWindow.addEventListener("click", () => {
-  controlModalWindows(showImageWindow);
+  closePopup(showImageWindow);
 });
-profileForm.addEventListener("submit", saveChanges);
-addCardForm.addEventListener("submit", saveChanges);
+profileForm.addEventListener("submit", saveProfileChanges);
+addCardForm.addEventListener("submit", saveNewCard);
