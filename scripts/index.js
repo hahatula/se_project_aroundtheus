@@ -60,6 +60,4 @@ function getCardElement(data) {
   cardsList.prepend(cardElement);
 }
 
-initialCards.forEach((element) => {
-  getCardElement(element);
-});
+initialCards.forEach(getCardElement);

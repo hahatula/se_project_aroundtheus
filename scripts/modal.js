@@ -1,4 +1,3 @@
-const modalWindow = document.querySelector(".modal");
 const modalIsOpenedClassName = "modal_opened";
 const profileEditWindow = document.querySelector(".modal_type_profile");
 const addCardWindow = document.querySelector(".modal_type_add-card");
@@ -12,13 +11,12 @@ const closeBtnShowImageWindow =
   showImageWindow.querySelector(".modal__close-btn");
 const profileForm = profileEditWindow.querySelector(".form");
 const addCardForm = addCardWindow.querySelector(".form");
-let profileName = document.querySelector(".explorer__name");
-let profileAbout = document.querySelector(".explorer__description");
-let inputName = profileEditWindow.querySelector(".form__input_name");
-let inputAbout = profileEditWindow.querySelector(".form__input_about");
-let inputTitle = addCardWindow.querySelector(".form__input_title");
-let inputImgLink = addCardWindow.querySelector(".form__input_image-link");
-let newCard;
+const profileName = document.querySelector(".explorer__name");
+const profileAbout = document.querySelector(".explorer__description");
+const inputName = profileEditWindow.querySelector(".form__input_name");
+const inputAbout = profileEditWindow.querySelector(".form__input_about");
+const inputTitle = addCardWindow.querySelector(".form__input_title");
+const inputImgLink = addCardWindow.querySelector(".form__input_image-link");
 
 function controlModalWindows(modal) {
   modal.classList.toggle(modalIsOpenedClassName);
@@ -35,7 +33,7 @@ function saveChanges(e) {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   if (profileEditWindow.classList.contains(modalIsOpenedClassName)) {
-    profileEditWindow.classList.toggle(modalIsOpenedClassName);
+    controlModalWindows(profileEditWindow);
   } else if (addCardWindow.classList.contains(modalIsOpenedClassName)) {
     newName = inputTitle.value;
     newLink = inputImgLink.value;
