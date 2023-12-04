@@ -31,20 +31,11 @@ function saveProfileChanges(e) {
 
 function saveNewCard(e) {
   e.preventDefault();
-  newName = inputTitle.value;
-  newLink = inputImgLink.value;
-  createNewCard(newName, newLink);
-  getCardElement(newCard); //this function is created in index.js
+  const newName = inputTitle.value;
+  const newLink = inputImgLink.value;
+  getCardElement({newName, newLink});
   closePopup(addCardWindow);
   e.target.reset();
-}
-
-function createNewCard(newName, newLink) {
-  newCard = {
-    name: newName,
-    link: newLink,
-  };
-  return newCard;
 }
 
 editBtn.addEventListener("click", () => {
