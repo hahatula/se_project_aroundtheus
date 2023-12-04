@@ -33,7 +33,7 @@ function saveNewCard(e) {
   e.preventDefault();
   const newName = inputTitle.value;
   const newLink = inputImgLink.value;
-  getCardElement({newName, newLink});
+  getCardElement({ newName, newLink });
   closePopup(addCardWindow);
   e.target.reset();
 }
@@ -48,10 +48,10 @@ addBtn.addEventListener("click", () => {
 });
 
 closeButtons.forEach((button) => {
-  // find the closest popup 
+  // find the closest popup
   const popup = button.closest(".modal");
   // set the listener
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener("click", () => closePopup(popup));
 });
 
 profileForm.addEventListener("submit", saveProfileChanges);

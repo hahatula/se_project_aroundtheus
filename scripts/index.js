@@ -38,7 +38,7 @@ function createCard(data) {
   const cardTitle = cardElement.querySelector(".card__title-text");
   const cardLikeIcon = cardElement.querySelector(".card__fav-icon");
   const cardTrashIcon = cardElement.querySelector(".card__trash-icon");
-  
+
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
@@ -59,7 +59,7 @@ function createCard(data) {
 }
 
 function getCardElement(data) {
-  const cardElement = createCard(data)
+  const cardElement = createCard(data);
   cardsList.prepend(cardElement);
 }
 
