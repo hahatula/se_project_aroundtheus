@@ -28,16 +28,17 @@ const initialCards = [
 const cardsList = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
-  
+const showImage = document.querySelector(".modal_type_show-image");
+const modalImage = showImage.querySelector(".modal__image");
+const modalImageLable = showImage.querySelector(".modal__image-lable");
+
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title-text");
   const cardLikeIcon = cardElement.querySelector(".card__fav-icon");
   const cardTrashIcon = cardElement.querySelector(".card__trash-icon");
-  const showImage = document.querySelector(".modal_type_show-image");
-  const modalImage = showImage.querySelector(".modal__image");
-  const modalImageLable = showImage.querySelector(".modal__image-lable");
+  
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
