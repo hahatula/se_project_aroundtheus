@@ -31,9 +31,9 @@ function saveProfileChanges(e) {
 
 function saveNewCard(e) {
   e.preventDefault();
-  const newName = inputTitle.value;
-  const newLink = inputImgLink.value;
-  getCardElement({ newName, newLink });
+  const name = inputTitle.value;
+  const link = inputImgLink.value;
+  getCardElement({ name, link });
   closePopup(addCardWindow);
   e.target.reset();
 }
