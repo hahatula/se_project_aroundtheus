@@ -1,7 +1,7 @@
 const modalIsOpenedClassName = "modal_opened";
-const profileEditWindow = document.querySelector(".modal_type_profile");
-const addCardWindow = document.querySelector(".modal_type_add-card");
-const showImageWindow = document.querySelector(".modal_type_show-image");
+const profileEditPopup = document.querySelector(".modal_type_profile");
+const addCardPopup = document.querySelector(".modal_type_add-card");
+const openImagePopup = document.querySelector(".modal_type_show-image");
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
 const closeButtons = document.querySelectorAll(".modal__close-btn");
@@ -9,10 +9,10 @@ const profileForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
 const profileName = document.querySelector(".explorer__name");
 const profileAbout = document.querySelector(".explorer__description");
-const inputName = profileEditWindow.querySelector(".form__input_name");
-const inputAbout = profileEditWindow.querySelector(".form__input_about");
-const inputTitle = addCardWindow.querySelector(".form__input_title");
-const inputImgLink = addCardWindow.querySelector(".form__input_image-link");
+const inputName = profileEditPopup.querySelector(".form__input_name");
+const inputAbout = profileEditPopup.querySelector(".form__input_about");
+const inputTitle = addCardPopup.querySelector(".form__input_title");
+const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
 
 function openPopup(popup) {
   popup.classList.add(modalIsOpenedClassName);
@@ -26,7 +26,7 @@ function saveProfileChanges(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  closePopup(profileEditWindow);
+  closePopup(profileEditPopup);
 }
 
 function saveNewCard(e) {
@@ -34,17 +34,18 @@ function saveNewCard(e) {
   const name = inputTitle.value;
   const link = inputImgLink.value;
   getCardElement({ name, link });
-  closePopup(addCardWindow);
+  closePopup(addCardPopup);
+  console.log(e.target);
   e.target.reset();
 }
 
 editBtn.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  openPopup(profileEditWindow);
+  openPopup(profileEditPopup);
 });
 addBtn.addEventListener("click", () => {
-  openPopup(addCardWindow);
+  openPopup(addCardPopup);
 });
 
 closeButtons.forEach((button) => {

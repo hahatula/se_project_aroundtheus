@@ -53,7 +53,7 @@ function createCard(data) {
     modalImage.src = data.link;
     modalImage.alt = data.name;
     modalImageLable.textContent = data.name;
-    openPopup(showImageWindow);
+    openPopup(openImagePopup);
   });
   return cardElement;
 }
