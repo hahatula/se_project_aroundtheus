@@ -71,12 +71,18 @@
               name="name"
               type="text"
               value="Jacques Cousteau"
+              minlength="2"
+              maxlength="40"
+              required
             />
             <input
               class="form__input form__input_about"
               name="about"
               type="text"
               value="Explorer"
+              minlength="2"
+              maxlength="200"
+              required
             />
           </fieldset>
           <button class="form__submit" type="submit">Save</button>
@@ -99,12 +105,16 @@
               name="title"
               type="text"
               placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
             />
             <input
               class="form__input form__input_image-link"
               name="image-link"
-              type="text"
+              type="url"
               placeholder="Image link"
+              required
             />
           </fieldset>
           <button class="form__submit" type="submit">Create</button>
