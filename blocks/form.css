@@ -22,7 +22,6 @@
 .form__field {
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 .form__input {
@@ -34,13 +33,23 @@
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
 }
 
-.form__input-error {
+.form__input:focus-visible {
+    outline: none;
+}
+
+.form__input_type_error {
     border-bottom: solid 1px #FF0000;
 }
 
 .form__error-message {
+    display: none;
     color: #FF0000;
     font-size: 12px;
+    margin-top: 5px;
+}
+
+.form__error-message_active {
+    display: block;
 }
 
 .form__submit {
@@ -56,6 +65,14 @@
 .form__submit:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.form__submit_disabled {
+    opacity: .2;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    pointer-events: none;
 }
 
 @media screen and (max-width: 618px) {

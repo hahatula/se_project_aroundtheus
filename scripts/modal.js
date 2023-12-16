@@ -22,6 +22,71 @@ function closePopup(popup) {
   popup.classList.remove(modalIsOpenedClassName);
 }
 
+// validation //
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error-message`);
+  inputElement.classList.add("form__input_type_error");
+  errorElement.classList.add("form__error-message_active");
+  errorElement.textContent = errorMessage;
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error-message`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__error-message_active");
+}
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("form__submit_disabled");
+  } else {
+    buttonElement.classList.remove("form__submit_disabled");
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+  const buttonElement = formElement.querySelector(".form__submit");
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".form"));
+  formList.forEach((formElement) => {
+    const buttonElement = formElement.querySelector(".form__submit");
+    buttonElement.classList.add("form__submit_disabled")
+    formElement.addEventListener("submit", function (e) {
+      e.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+
+enableValidation();
+
+//
+
 function saveProfileChanges(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;

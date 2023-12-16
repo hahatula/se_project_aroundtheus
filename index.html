@@ -63,11 +63,12 @@
 
     <div class="modal modal_type_profile">
       <div class="modal__container">
-        <form class="modal__form form" name="profile-form">
+        <form class="modal__form form" name="profile-form" novalidate>
           <h2 class="form__title">Edit profile</h2>
           <fieldset class="form__fieldset">
             <label class="form__field">
               <input
+                id="name"
                 class="form__input form__input_name"
                 name="name"
                 type="text"
@@ -80,6 +81,7 @@
             </label>
             <label class="form__field">
               <input
+                id="about"
                 class="form__input form__input_about"
                 name="about"
                 type="text"
@@ -103,11 +105,12 @@
 
     <div class="modal modal_type_add-card">
       <div class="modal__container">
-        <form class="modal__form form" name="card-form">
+        <form class="modal__form form" name="card-form" novalidate>
           <h2 class="form__title">New place</h2>
           <fieldset class="form__fieldset">
             <label class="form__field">
               <input
+                id="title"
                 class="form__input form__input_title"
                 name="title"
                 type="text"
@@ -120,6 +123,7 @@
             </label>
             <label class="form__field">
               <input
+                id="link"
                 class="form__input form__input_image-link"
                 name="image-link"
                 type="url"
