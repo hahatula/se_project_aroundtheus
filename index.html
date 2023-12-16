@@ -66,24 +66,30 @@
         <form class="modal__form form" name="profile-form">
           <h2 class="form__title">Edit profile</h2>
           <fieldset class="form__fieldset">
-            <input
-              class="form__input form__input_name"
-              name="name"
-              type="text"
-              value="Jacques Cousteau"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <input
-              class="form__input form__input_about"
-              name="about"
-              type="text"
-              value="Explorer"
-              minlength="2"
-              maxlength="200"
-              required
-            />
+            <label class="form__field">
+              <input
+                class="form__input form__input_name"
+                name="name"
+                type="text"
+                value="Jacques Cousteau"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="form__error-message name-error-message"></span>
+            </label>
+            <label class="form__field">
+              <input
+                class="form__input form__input_about"
+                name="about"
+                type="text"
+                value="Explorer"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="form__error-message about-error-message"></span>
+            </label>
           </fieldset>
           <button class="form__submit" type="submit">Save</button>
         </form>
@@ -100,22 +106,28 @@
         <form class="modal__form form" name="card-form">
           <h2 class="form__title">New place</h2>
           <fieldset class="form__fieldset">
-            <input
-              class="form__input form__input_title"
-              name="title"
-              type="text"
-              placeholder="Title"
-              minlength="1"
-              maxlength="30"
-              required
-            />
-            <input
-              class="form__input form__input_image-link"
-              name="image-link"
-              type="url"
-              placeholder="Image link"
-              required
-            />
+            <label class="form__field">
+              <input
+                class="form__input form__input_title"
+                name="title"
+                type="text"
+                placeholder="Title"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span class="form__error-message title-error-message"></span>
+            </label>
+            <label class="form__field">
+              <input
+                class="form__input form__input_image-link"
+                name="image-link"
+                type="url"
+                placeholder="Image link"
+                required
+              />
+              <span class="form__error-message link-error-message"></span>
+            </label>
           </fieldset>
           <button class="form__submit" type="submit">Create</button>
         </form>
