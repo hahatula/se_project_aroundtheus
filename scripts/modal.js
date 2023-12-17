@@ -13,6 +13,8 @@ const inputName = profileEditPopup.querySelector(".form__input_name");
 const inputAbout = profileEditPopup.querySelector(".form__input_about");
 const inputTitle = addCardPopup.querySelector(".form__input_title");
 const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
+const modalWindows = Array.from(document.querySelectorAll(".modal"));
+const modalWindowClassName = "modal";
 
 function openPopup(popup) {
   popup.classList.add(modalIsOpenedClassName);
@@ -44,8 +46,23 @@ editBtn.addEventListener("click", () => {
   inputAbout.value = profileAbout.textContent;
   openPopup(profileEditPopup);
 });
+
 addBtn.addEventListener("click", () => {
   openPopup(addCardPopup);
+});
+
+modalWindows.forEach((window) => {
+  window.addEventListener("click", (e) => {
+    if (e.target.classList.contains(modalWindowClassName)) {
+      closePopup(window);
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    console.log(e);
+    if (e.key === "Escape") {
+      closePopup(window);
+    }
+  });
 });
 
 closeButtons.forEach((button) => {
