@@ -37,8 +37,11 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(config.inactiveButtonClass);
+      //add attribute "disabled" to prevent submit on "Enter"
+      buttonElement.setAttribute("disabled", "");
     } else {
       buttonElement.classList.remove(config.inactiveButtonClass);
+      buttonElement.removeAttribute("disabled");
     }
   };
   
@@ -57,11 +60,8 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   const enableValidation = (config) => {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
-      const buttonElement = formElement.querySelector(config.submitButtonSelector).classList.add(config.inactiveButtonClass);
-      formElement.addEventListener("submit", (e) => {
-        e.preventDefault();
-      });
       setEventListeners(formElement);
+    //   setEventListeners(config.formElement);
     });
   };
   

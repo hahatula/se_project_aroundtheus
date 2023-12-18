@@ -51,16 +51,16 @@ addBtn.addEventListener("click", () => {
   openPopup(addCardPopup);
 });
 
-modalWindows.forEach((window) => {
-  window.addEventListener("click", (e) => {
+modalWindows.forEach((modalWindow) => {
+  modalWindow.addEventListener("click", (e) => {
     if (e.target.classList.contains(modalWindowClassName)) {
-      closePopup(window);
+      closePopup(modalWindow);
     }
   });
   document.addEventListener("keydown", (e) => {
     console.log(e);
     if (e.key === "Escape") {
-      closePopup(window);
+      closePopup(modalWindow);
     }
   });
 });
