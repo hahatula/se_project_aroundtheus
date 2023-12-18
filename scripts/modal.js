@@ -1,10 +1,11 @@
+const modalWindowClassName = "modal";
 const modalIsOpenedClassName = "modal_opened";
+const closeModalWindowClassName = "modal__close-btn";
 const profileEditPopup = document.querySelector(".modal_type_profile");
 const addCardPopup = document.querySelector(".modal_type_add-card");
 const openImagePopup = document.querySelector(".modal_type_show-image");
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
-const closeButtons = document.querySelectorAll(".modal__close-btn");
 const profileForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
 const profileName = document.querySelector(".explorer__name");
@@ -14,14 +15,15 @@ const inputAbout = profileEditPopup.querySelector(".form__input_about");
 const inputTitle = addCardPopup.querySelector(".form__input_title");
 const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
-const modalWindowClassName = "modal";
 
 function openPopup(popup) {
   popup.classList.add(modalIsOpenedClassName);
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove(modalIsOpenedClassName);
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 function saveProfileChanges(e) {
@@ -37,7 +39,6 @@ function saveNewCard(e) {
   const link = inputImgLink.value;
   getCardElement({ name, link });
   closePopup(addCardPopup);
-  console.log(e.target);
   e.target.reset();
 }
 
@@ -51,25 +52,21 @@ addBtn.addEventListener("click", () => {
   openPopup(addCardPopup);
 });
 
+function closeByEscape(e) {
+  if (e.key === "Escape") {
+    closePopup(e.currentTarget.querySelector(`.${modalIsOpenedClassName}`));
+  }
+}
+
 modalWindows.forEach((modalWindow) => {
   modalWindow.addEventListener("click", (e) => {
-    if (e.target.classList.contains(modalWindowClassName)) {
+    if (
+      e.target.classList.contains(modalWindowClassName) ||
+      e.target.classList.contains(closeModalWindowClassName)
+    ) {
       closePopup(modalWindow);
     }
   });
-  document.addEventListener("keydown", (e) => {
-    console.log(e);
-    if (e.key === "Escape") {
-      closePopup(modalWindow);
-    }
-  });
-});
-
-closeButtons.forEach((button) => {
-  // find the closest popup
-  const popup = button.closest(".modal");
-  // set the listener
-  button.addEventListener("click", () => closePopup(popup));
 });
 
 profileForm.addEventListener("submit", saveProfileChanges);
