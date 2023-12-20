@@ -45,12 +45,10 @@ function saveNewCard(e) {
 editBtn.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  enableValidation(config);
   openPopup(profileEditPopup);
 });
 
 addBtn.addEventListener("click", () => {
-  enableValidation(config);
   openPopup(addCardPopup);
 });
 
