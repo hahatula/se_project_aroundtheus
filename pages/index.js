@@ -37,7 +37,8 @@ function saveNewCard(e) {
   e.preventDefault();
   const name = inputTitle.value;
   const link = inputImgLink.value;
-  getCardElement({ name, link });
+  const card = new Card({ name, link });
+  renderCard(card);
   closePopup(addCardPopup);
   e.target.reset();
 }
