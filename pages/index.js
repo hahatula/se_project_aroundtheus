@@ -15,6 +15,15 @@ const inputAbout = profileEditPopup.querySelector(".form__input_about");
 const inputTitle = addCardPopup.querySelector(".form__input_title");
 const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
+const modalImage = openImagePopup.querySelector(".modal__image");
+const modalImageLable = openImagePopup.querySelector(".modal__image-lable");
+
+const handleImageClick = (data) => {
+  modalImage.src = data._image;
+  modalImage.alt = data._name;
+  modalImageLable.textContent = data._name;
+  openPopup(openImagePopup);
+}
 
 function openPopup(popup) {
   popup.classList.add(modalIsOpenedClassName);
@@ -37,7 +46,7 @@ function saveNewCard(e) {
   e.preventDefault();
   const name = inputTitle.value;
   const link = inputImgLink.value;
-  const card = new Card({ name, link });
+  const card = new Card({ name, link }, ".card", handleImageClick);
   renderCard(card);
   closePopup(addCardPopup);
   e.target.reset();
