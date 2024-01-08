@@ -26,8 +26,6 @@ const initialCards = [
   ];
   
 const cardsList = document.querySelector(".cards__list");
-// const cardLikeButton = document.querySelector(".card__fav-icon");
-// const cardDeleteButton = document.querySelector(".card__trash-icon");
 
 class Card {
     constructor(data, cardSelector, handleImageClick) {
@@ -35,8 +33,6 @@ class Card {
         this._link = data.link;
         this._cardSelector = cardSelector;
         this._handleImageClick = handleImageClick;
-        this._cardLikeButton = document.querySelector(".card__fav-icon");
-        this._cardDeleteButton = document.querySelector(".card__trash-icon");
     }
 
     _getTemplate() {
@@ -46,7 +42,7 @@ class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        // this._setEventListeners();
+        this._setEventListeners();
 
         this._element.querySelector(".card__title-text").textContent = this._name;
         this._element.querySelector(".card__image").src = this._link;
@@ -56,11 +52,14 @@ class Card {
     }
 
     _setEventListeners() {
+        this._cardLikeButton = this._element.querySelector(".card__fav-icon");
+        this._cardDeleteButton = this._element.querySelector(".card__trash-icon");
+
         this._cardLikeButton.addEventListener('click', () => {
-            this._handleLikeButton;
+            this._handleLikeButton();
         });
-        cardDeleteButton.addEventListener('click', () => {
-            this._handleDeleteButton;
+        this._cardDeleteButton.addEventListener('click', () => {
+            this._handleDeleteButton();
         });
     }
 
@@ -69,7 +68,7 @@ class Card {
     }
 
     _handleLikeButton() {
-        cardLikeButton.classList.toggle("card__fav-icon_active");
+        this._cardLikeButton.classList.toggle("card__fav-icon_active");
     }
 }
 
