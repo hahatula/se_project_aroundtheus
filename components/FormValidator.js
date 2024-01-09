@@ -7,7 +7,9 @@ class FormValidator {
 
   _checkValidity() {}
 
-  _changeBtnState() {}
+  _toggleButtonState() {}
+
+  _disableButton() {}
 
   _setEventListeners() {
     const inputList = Array.from(
@@ -16,12 +18,12 @@ class FormValidator {
     const buttonElement = this._formElement.querySelector(
       this._config.submitButtonSelector
     );
-    disableButton(buttonElement, config);
+    this._disableButton(buttonElement, this._config);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", function () {
-        toggleButtonState(inputList, buttonElement, this._config);
-        checkInputValidity(this._formElement, inputElement, this._config);
+        this._toggleButtonState(inputList, buttonElement, this._config);
+        this._checkValidity(this._formElement, inputElement, this._config);
       });
     });
   }
@@ -29,7 +31,8 @@ class FormValidator {
   _handleSmth() {}
 
   enableValidation() {
-    this._setEventListeners(formElement, this._config);
+    this._setEventListeners(this._formElement, this._config);
+    console.log(`this._formElement is ${this._formElement}`);
   }
 }
 
@@ -42,4 +45,5 @@ const validationConfig = {
   errorClass: "form__error-message_active",
 };
 
-const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
+const addCardFormValidator = new FormValidator(validationConfig, document.forms["card-form"]);
+addCardFormValidator.enableValidation();
