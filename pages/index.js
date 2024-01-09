@@ -1,3 +1,4 @@
+import Card from "../components/card.js";
 const modalWindowClassName = "modal";
 const modalIsOpenedClassName = "modal_opened";
 const closeModalWindowClassName = "modal__close-btn";
@@ -17,6 +18,37 @@ const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
 const modalImage = openImagePopup.querySelector(".modal__image");
 const modalImageLable = openImagePopup.querySelector(".modal__image-lable");
+
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+  },
+];
+
+const cardsList = document.querySelector(".cards__list");
+
+
 
 const handleImageClick = (data) => {
   modalImage.src = data._image;
@@ -77,6 +109,16 @@ modalWindows.forEach((modalWindow) => {
       closePopup(modalWindow);
     }
   });
+});
+
+function renderCard(card) {
+  const cardElement = card.generateCard();
+  cardsList.prepend(cardElement);
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item, ".card", handleImageClick);
+  renderCard(card);
 });
 
 profileForm.addEventListener("submit", saveProfileChanges);
