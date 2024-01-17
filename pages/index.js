@@ -1,4 +1,4 @@
-import Card from "../components/card.js";
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 const modalWindowClassName = "modal";
 const modalIsOpenedClassName = "modal_opened";
@@ -58,17 +58,23 @@ const validationConfig = {
   errorClass: "form__error-message_active",
 };
 
-const addCardFormValidator = new FormValidator(validationConfig, document.forms["card-form"]);
-const profileFormValidator = new FormValidator(validationConfig, document.forms["profile-form"]);
+const addCardFormValidator = new FormValidator(
+  validationConfig,
+  document.forms["card-form"]
+);
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  document.forms["profile-form"]
+);
 addCardFormValidator.enableValidation();
-profileFormValidator.enableValidation(); 
+profileFormValidator.enableValidation();
 
 const handleImageClick = (data) => {
   modalImage.src = data._image;
   modalImage.alt = data._name;
   modalImageLable.textContent = data._name;
   openPopup(openImagePopup);
-}
+};
 
 function openPopup(popup) {
   popup.classList.add(modalIsOpenedClassName);

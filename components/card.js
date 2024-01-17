@@ -37,7 +37,6 @@ class Card {
       this._handleDeleteButton();
     });
     this._cardImageElement.addEventListener("click", () => {
-      console.log(this);
       this._handleImageClick(this);
     });
   }
