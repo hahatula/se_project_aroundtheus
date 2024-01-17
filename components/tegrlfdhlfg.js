@@ -17,8 +17,8 @@ class Card {
     this._element = this._getTemplate();
 
     this._element.querySelector(".card__title-text").textContent = this._name;
-    this._element.querySelector(".card__image").src = this._image;
-    this._element.querySelector(".card__image").alt = this._name;
+    this._cardImageElement.src = this._image;
+    this._cardImageElement.alt = this._name;
 
     this._setEventListeners();
 
@@ -43,6 +43,7 @@ class Card {
 
   _handleDeleteButton() {
     this._element.remove();
+    this._element = null; //remove the link to the DOM element after deleting a card. It helps javascript garbage collector.
   }
 
   _handleLikeButton() {

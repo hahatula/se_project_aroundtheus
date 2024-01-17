@@ -52,6 +52,11 @@ class FormValidator {
     buttonElement.removeAttribute("disabled");
   }
 
+  _handleInput(inputList, buttonElement, inputElement) {
+    this._toggleButtonState(inputList, buttonElement);
+    this._checkValidity(inputElement);
+  }
+
   _setEventListeners() {
     //array of inputs
     const inputList = Array.from(
@@ -68,11 +73,6 @@ class FormValidator {
         this._handleInput.bind(this, inputList, buttonElement, inputElement)
       );
     });
-  }
-
-  _handleInput(inputList, buttonElement, inputElement) {
-    this._toggleButtonState(inputList, buttonElement);
-    this._checkValidity(inputElement);
   }
 
   enableValidation() {
