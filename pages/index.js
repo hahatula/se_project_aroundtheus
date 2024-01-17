@@ -1,4 +1,5 @@
 import Card from "../components/card.js";
+import FormValidator from "../components/FormValidator.js";
 const modalWindowClassName = "modal";
 const modalIsOpenedClassName = "modal_opened";
 const closeModalWindowClassName = "modal__close-btn";
@@ -48,7 +49,19 @@ const initialCards = [
 
 const cardsList = document.querySelector(".cards__list");
 
+const validationConfig = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "form__submit_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error-message_active",
+};
 
+const addCardFormValidator = new FormValidator(validationConfig, document.forms["card-form"]);
+const profileFormValidator = new FormValidator(validationConfig, document.forms["profile-form"]);
+addCardFormValidator.enableValidation();
+profileFormValidator.enableValidation(); 
 
 const handleImageClick = (data) => {
   modalImage.src = data._image;

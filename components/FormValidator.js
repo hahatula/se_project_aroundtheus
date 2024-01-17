@@ -2,48 +2,82 @@ class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
-    console.log(this);
   }
 
-  _checkValidity() {}
-
-  _toggleButtonState() {}
-
-  _disableButton() {}
-
-  _setEventListeners() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._config.inputSelector)
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error-message`
     );
-    const buttonElement = this._formElement.querySelector(
-      this._config.submitButtonSelector
-    );
-    this._disableButton(buttonElement, this._config);
+    inputElement.classList.add(this._config.inputErrorClass);
+    errorElement.classList.add(this._config.errorClass);
+    errorElement.textContent = errorMessage;
+  }
 
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", function () {
-        this._toggleButtonState(inputList, buttonElement, this._config);
-        this._checkValidity(this._formElement, inputElement, this._config);
-      });
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error-message`
+    );
+    inputElement.classList.remove(this._config.inputErrorClass);
+    errorElement.classList.remove(this._config.errorClass);
+  }
+
+  _checkValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement, inputElement.validationMessage);
+    } else {
+      this._hideInputError(inputElement);
+    }
+  }
+
+  _hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
     });
   }
 
-  _handleSmth() {}
+  _toggleButtonState(inputList, buttonElement) {
+    this._hasInvalidInput(inputList)
+      ? this._disableButton(buttonElement)
+      : this._enableButton(buttonElement);
+  }
+
+  _disableButton(buttonElement) {
+    buttonElement.classList.add(this._config.inactiveButtonClass);
+    //add attribute "disabled" to prevent submit on "Enter"
+    buttonElement.setAttribute("disabled", "");
+  }
+
+  _enableButton(buttonElement) {
+    buttonElement.classList.remove(this._config.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled");
+  }
+
+  _setEventListeners() {
+    //array of inputs
+    const inputList = Array.from(
+      this._formElement.querySelectorAll(this._config.inputSelector)
+    );
+
+    const buttonElement = this._formElement.querySelector(
+      this._config.submitButtonSelector
+    );
+    this._disableButton(buttonElement);
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener(
+        "input",
+        this._handleInput.bind(this, inputList, buttonElement, inputElement)
+      );
+    });
+  }
+
+  _handleInput(inputList, buttonElement, inputElement) {
+    this._toggleButtonState(inputList, buttonElement);
+    this._checkValidity(inputElement);
+  }
 
   enableValidation() {
-    this._setEventListeners(this._formElement, this._config);
-    console.log(`this._formElement is ${this._formElement}`);
+    this._setEventListeners();
   }
 }
 
-const validationConfig = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit",
-  inactiveButtonClass: "form__submit_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error-message_active",
-};
-
-const addCardFormValidator = new FormValidator(validationConfig, document.forms["card-form"]);
-addCardFormValidator.enableValidation();
+export default FormValidator;
