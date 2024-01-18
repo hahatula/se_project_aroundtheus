@@ -58,17 +58,6 @@ const validationConfig = {
   errorClass: "form__error-message_active",
 };
 
-const addCardFormValidator = new FormValidator(
-  validationConfig,
-  document.forms["card-form"]
-);
-const profileFormValidator = new FormValidator(
-  validationConfig,
-  document.forms["profile-form"]
-);
-addCardFormValidator.enableValidation();
-profileFormValidator.enableValidation();
-
 const handleImageClick = (data) => {
   modalImage.src = data._image;
   modalImage.alt = data._name;
@@ -76,7 +65,12 @@ const handleImageClick = (data) => {
   openPopup(openImagePopup);
 };
 
+const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+
 function openPopup(popup) {
+  addCardFormValidator.enableValidation();
+  profileFormValidator.enableValidation();
   popup.classList.add(modalIsOpenedClassName);
   document.addEventListener("keydown", closeByEscape);
 }
