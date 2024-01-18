@@ -71,7 +71,10 @@ addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
 function openPopup(popup, validator) {
-  validator.resetValidation();
+  //check if popup has a form
+  if (validator) {
+    validator.resetValidation();
+  }
   popup.classList.add(modalIsOpenedClassName);
   document.addEventListener("keydown", closeByEscape);
 }
