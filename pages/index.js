@@ -67,10 +67,11 @@ const handleImageClick = (data) => {
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
+addCardFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
-function openPopup(popup) {
-  addCardFormValidator.enableValidation();
-  profileFormValidator.enableValidation();
+function openPopup(popup, validator) {
+  validator.resetValidation();
   popup.classList.add(modalIsOpenedClassName);
   document.addEventListener("keydown", closeByEscape);
 }
@@ -91,7 +92,8 @@ function saveNewCard(e) {
   e.preventDefault();
   const name = inputTitle.value;
   const link = inputImgLink.value;
-  const card = new Card({ name, link }, ".card", handleImageClick);
+  const item = { name, link };
+  const card = createCard(item);
   renderCard(card);
   closePopup(addCardPopup);
   e.target.reset();
@@ -100,11 +102,11 @@ function saveNewCard(e) {
 editBtn.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  openPopup(profileEditPopup);
+  openPopup(profileEditPopup, profileFormValidator);
 });
 
 addBtn.addEventListener("click", () => {
-  openPopup(addCardPopup);
+  openPopup(addCardPopup, addCardFormValidator);
 });
 
 function closeByEscape(e) {
@@ -124,13 +126,18 @@ modalWindows.forEach((modalWindow) => {
   });
 });
 
+function createCard(item) {
+  const card = new Card(item, ".card", handleImageClick);
+  return card;
+}
+
 function renderCard(card) {
   const cardElement = card.generateCard();
   cardsList.prepend(cardElement);
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, ".card", handleImageClick);
+  const card = createCard(item);
   renderCard(card);
 });
 
