@@ -71,10 +71,6 @@ addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
 function openPopup(popup, validator) {
-  //check if popup has a form
-  if (validator) {
-    validator.resetValidation();
-  }
   popup.classList.add(modalIsOpenedClassName);
   document.addEventListener("keydown", closeByEscape);
 }
@@ -103,13 +99,15 @@ function saveNewCard(e) {
 }
 
 editBtn.addEventListener("click", () => {
+  profileFormValidator.resetValidation();
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  openPopup(profileEditPopup, profileFormValidator);
+  openPopup(profileEditPopup);
 });
 
 addBtn.addEventListener("click", () => {
-  openPopup(addCardPopup, addCardFormValidator);
+  addCardFormValidator.resetValidation();
+  openPopup(addCardPopup);
 });
 
 function closeByEscape(e) {
