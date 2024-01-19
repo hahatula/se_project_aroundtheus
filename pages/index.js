@@ -131,11 +131,11 @@ modalWindows.forEach((modalWindow) => {
 
 function createCard(item) {
   const card = new Card(item, ".card", handleImageClick);
-  return card;
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
-function renderCard(card) {
-  const cardElement = card.generateCard();
+function renderCard(cardElement) {
   cardsList.prepend(cardElement);
 }
 
