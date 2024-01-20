@@ -87,15 +87,16 @@ function saveProfileChanges(e) {
   closePopup(profileEditPopup);
 }
 
-function saveNewCard(e) {
-  e.preventDefault();
+function saveNewCard(event) {
+  event.preventDefault();
   const name = inputTitle.value;
   const link = inputImgLink.value;
   const item = { name, link };
   const card = createCard(item);
   renderCard(card);
   closePopup(addCardPopup);
-  e.target.reset();
+  addCardFormValidator.disableButton();
+  event.target.reset();
 }
 
 editBtn.addEventListener("click", () => {
@@ -106,7 +107,6 @@ editBtn.addEventListener("click", () => {
 });
 
 addBtn.addEventListener("click", () => {
-  addCardFormValidator.resetValidation();
   openPopup(addCardPopup);
 });
 

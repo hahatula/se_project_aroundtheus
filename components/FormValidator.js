@@ -33,40 +33,40 @@ class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleButtonState(inputList, buttonElement) {
-    this._hasInvalidInput(inputList)
-      ? this._disableButton(buttonElement)
-      : this._enableButton(buttonElement);
+  _toggleButtonState() {
+    this._hasInvalidInput()
+      ? this.disableButton()
+      : this._enableButton();
   }
 
-  _disableButton(buttonElement) {
-    buttonElement.classList.add(this._config.inactiveButtonClass);
+  disableButton() {
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
     //add attribute "disabled" to prevent submit on "Enter"
-    buttonElement.setAttribute("disabled", "");
+    this._buttonElement.setAttribute("disabled", "");
   }
 
-  _enableButton(buttonElement) {
-    buttonElement.classList.remove(this._config.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled");
+  _enableButton() {
+    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+    this._buttonElement.removeAttribute("disabled");
   }
 
-  _handleInput(inputList, buttonElement, inputElement) {
-    this._toggleButtonState(inputList, buttonElement);
+  _handleInput(inputElement) {
+    this._toggleButtonState();
     this._checkValidity(inputElement);
   }
 
   _setEventListeners() {
-    this._disableButton(this._buttonElement);
+    this.disableButton();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         const currentHandle = this._handleInput.bind(this);
-        currentHandle(this._inputList, this._buttonElement, inputElement);
+        currentHandle(inputElement);
       });
     });
   }
@@ -76,7 +76,7 @@ class FormValidator {
   }
 
   resetValidation() {
-    this._disableButton(this._buttonElement);
+    this.disableButton();
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
