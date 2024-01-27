@@ -7,19 +7,22 @@
     <meta name="description" content="Travels of Jacques Cousteau" />
     <meta name="author" content="Olga Golubev" />
     <meta name="keywords" content="Travel, Nature, Adventure" />
-    <link rel="stylesheet" href="pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <img class="header__logo" src="images/Logo.svg" alt="Logotype" />
+        <img
+          class="header__logo"
+          src="<%=require('./images/Logo.svg')%>"
+          alt="Logotype"
+        />
       </header>
       <main class="content">
         <section class="explorer">
           <img
             class="explorer__photo"
-            src="images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Profile image"
           />
           <div class="explorer__info">
@@ -158,9 +161,5 @@
         ></button>
       </div>
     </div>
-
-    <!-- Scripts -->
-
-    <script type="module" src="src/index.js"></script>
   </body>
 </html>

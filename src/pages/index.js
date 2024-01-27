@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import "./index.css";
 const modalWindowClassName = "modal";
 const modalIsOpenedClassName = "modal_opened";
 const closeModalWindowClassName = "modal__close-btn";
