@@ -1,28 +1,18 @@
-// import { escape } from "core-js/fn/regexp";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
-import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import "./index.css";
-const modalWindowClassName = "modal";
-const modalIsOpenedClassName = "modal_opened";
-const closeModalWindowClassName = "modal__close-btn";
-const profileEditPopup = document.querySelector(".modal_type_profile");
-const addCardPopup = document.querySelector(".modal_type_add-card");
-const openImagePopup = document.querySelector(".modal_type_show-image");
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
 const profileForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
 const profileName = document.querySelector(".explorer__name");
 const profileAbout = document.querySelector(".explorer__description");
-const inputName = profileEditPopup.querySelector(".form__input_name");
-const inputAbout = profileEditPopup.querySelector(".form__input_about");
-const inputTitle = addCardPopup.querySelector(".form__input_title");
-const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
+// const inputName = profileEditPopup.querySelector(".form__input_name");
+// const inputAbout = profileEditPopup.querySelector(".form__input_about");
+// const inputTitle = addCardPopup.querySelector(".form__input_title");
+// const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
-// const modalImage = openImagePopup.querySelector(".modal__image");
-// const modalImageLable = openImagePopup.querySelector(".modal__image-lable");
 
 const initialCards = [
   {
@@ -67,18 +57,6 @@ const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-//moved to classes____
-function openPopup(popup) {
-  popup.classList.add(modalIsOpenedClassName);
-  document.addEventListener("keydown", closeByEscape);
-}
-
-// function closePopup(popup) {
-//   popup.classList.remove(modalIsOpenedClassName);
-//   document.removeEventListener("keydown", closeByEscape);
-// }
-//_____________________
-
 function saveProfileChanges(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
@@ -86,47 +64,25 @@ function saveProfileChanges(e) {
   closePopup(profileEditPopup);
 }
 
-function saveNewCard(event) {
-  event.preventDefault();
-  const name = inputTitle.value;
-  const link = inputImgLink.value;
-  const item = { name, link };
+const saveNewCard = (item) => {
   const card = createCard(item);
   renderCard(card);
-  closePopup(addCardPopup);
   addCardFormValidator.disableButton();
-  event.target.reset();
 }
 
 editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  openPopup(profileEditPopup);
+  const profileEditPopup = new PopupWithForm(".modal_type_profile", "profile-form", saveProfileChanges);
+  profileEditPopup.open();
 });
+
+const addCardPopup = new PopupWithForm(".modal_type_add-card", "card-form", saveNewCard);
 
 addBtn.addEventListener("click", () => {
-  openPopup(addCardPopup);
+  addCardPopup.open();
 });
-
-//moved to classes____
-function closeByEscape(e) {
-  if (e.key === "Escape") {
-    closePopup(e.currentTarget.querySelector(`.${modalIsOpenedClassName}`));
-  }
-}
-
-modalWindows.forEach((modalWindow) => {
-  modalWindow.addEventListener("click", (e) => {
-    if (
-      e.target.classList.contains(modalWindowClassName) ||
-      e.target.classList.contains(closeModalWindowClassName)
-    ) {
-      // closePopup(modalWindow);
-    }
-  });
-});
-//____________________
 
 //creating cards from the array
 initialCards.forEach((item) => {
@@ -145,4 +101,3 @@ function renderCard(cardElement) {
 }
 
 profileForm.addEventListener("submit", saveProfileChanges);
-addCardForm.addEventListener("submit", saveNewCard);

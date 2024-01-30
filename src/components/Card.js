@@ -1,10 +1,10 @@
 import PopupWithImage from "./PopupWithImage.js";
+
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-    // this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -22,8 +22,6 @@ class Card {
     this._cardImageElement.src = this._image;
     this._cardImageElement.alt = this._name;
 
-    // this._popupWithImage = new PopupWithImage(".modal_type_show-image", this._image, this._name);
-    // console.log(this._popupWithImage);
     return this._element;
   }
 
@@ -54,7 +52,6 @@ class Card {
 
   _handleImageClick() {
     this._popupWithImage = new PopupWithImage(".modal_type_show-image");
-    console.log(this._popupWithImage);
     this._popupWithImage.open(this._image, this._name);
   }
 }
