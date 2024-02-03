@@ -18,13 +18,10 @@ class PopupWithForm extends Popup {
       this._handleFormSubmit(newCard);
       this._form.reset();
     } else if (this._popup.classList.contains("modal_type_profile")) {
-        const newName = this._userName.value;
-        const newAbout = this._about.value;
-        const newUserData = { newName, newAbout };
-        console.log(newUserData);
-        this._handleFormSubmit(newUserData);
-      // this._name = inputName.value;
-      // this._about = inputAbout.value;
+      const newName = this._userName.value;
+      const newAbout = this._about.value;
+      const newUserData = { newName, newAbout };
+      this._handleFormSubmit(newUserData);
     }
   }
 
