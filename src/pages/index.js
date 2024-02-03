@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import "./index.css";
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
@@ -52,20 +53,17 @@ const validationConfig = {
   errorClass: "form__error-message_active",
 };
 
+const userInfo = new UserInfo(".explorer__name", ".explorer__description");
 const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-function saveProfileChanges(user) {
-  profileName.textContent = user.userName.value;
-  profileAbout.textContent = user.about.value;
-};
-
-const saveNewCard = (item) => {
-  const card = createCard(item);
-  renderCard(card);
-  addCardFormValidator.disableButton();
+function saveProfileChanges({ newName, newAbout }) {
+  console.log({ newName, newAbout });
+  userInfo.setUserInfo({ newName, newAbout });
+  // profileName.textContent = user.userName.value;
+  // profileAbout.textContent = user.about.value;
 };
 
 const profileEditPopup = new PopupWithForm(
@@ -73,15 +71,20 @@ const profileEditPopup = new PopupWithForm(
   "profile-form",
   saveProfileChanges
 );
+
 editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
-  profileEditPopup.fillFields(
-    profileName.textContent,
-    profileAbout.textContent
-  );
-  // profileEditPopup.newUserData.about.value = profileAbout.textContent;
-  profileEditPopup.open();
+  const currentData = userInfo.getUserInfo();
+  profileEditPopup.fillFields(currentData);
+  profileEditPopup.open(); 
 });
+
+//creating new cards by filling out the form
+const saveNewCard = (item) => {
+  const card = createCard(item);
+  renderCard(card);
+  addCardFormValidator.disableButton();
+};
 
 const addCardPopup = new PopupWithForm(
   ".modal_type_add-card",

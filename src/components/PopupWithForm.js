@@ -5,8 +5,8 @@ class PopupWithForm extends Popup {
     super({ popupSelector });
     this._form = document.forms[formSelector];
     this._handleFormSubmit = handleFormSubmit;
-    // this._userName;
-    // this._about;
+    this._userName = this._form.querySelector(".form__input_name");
+    this._about = this._form.querySelector(".form__input_about");
     this._formSubmitEventListener();
   }
 
@@ -18,18 +18,19 @@ class PopupWithForm extends Popup {
       this._handleFormSubmit(newCard);
       this._form.reset();
     } else if (this._popup.classList.contains("modal_type_profile")) {
-        const userName = this._form.querySelector(".form__input_name");
-        const about = this._form.querySelector(".form__input_about");
-        const newUserData = { userName, about };
+        const newName = this._userName.value;
+        const newAbout = this._about.value;
+        const newUserData = { newName, newAbout };
+        console.log(newUserData);
         this._handleFormSubmit(newUserData);
       // this._name = inputName.value;
       // this._about = inputAbout.value;
     }
   }
 
-  fillFields(name, about) {
-    // this._userName.value = name;
-    // this._about.value = about;
+  fillFields(userInfo) {
+    this._userName.value = userInfo.currentName;
+    this._about.value = userInfo.currentAbout;
   }
 
   _formSubmitEventListener() {
