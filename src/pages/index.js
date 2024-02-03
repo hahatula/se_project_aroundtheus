@@ -12,7 +12,7 @@ const profileAbout = document.querySelector(".explorer__description");
 // const inputAbout = profileEditPopup.querySelector(".form__input_about");
 // const inputTitle = addCardPopup.querySelector(".form__input_title");
 // const inputImgLink = addCardPopup.querySelector(".form__input_image-link");
-const modalWindows = Array.from(document.querySelectorAll(".modal"));
+// const modalWindows = Array.from(document.querySelectorAll(".modal"));
 
 const initialCards = [
   {
@@ -57,28 +57,37 @@ const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-function saveProfileChanges(e) {
-  e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
-  closePopup(profileEditPopup);
-}
+function saveProfileChanges(user) {
+  profileName.textContent = user.userName.value;
+  profileAbout.textContent = user.about.value;
+};
 
 const saveNewCard = (item) => {
   const card = createCard(item);
   renderCard(card);
   addCardFormValidator.disableButton();
-}
+};
 
+const profileEditPopup = new PopupWithForm(
+  ".modal_type_profile",
+  "profile-form",
+  saveProfileChanges
+);
 editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-  const profileEditPopup = new PopupWithForm(".modal_type_profile", "profile-form", saveProfileChanges);
+  profileEditPopup.fillFields(
+    profileName.textContent,
+    profileAbout.textContent
+  );
+  // profileEditPopup.newUserData.about.value = profileAbout.textContent;
   profileEditPopup.open();
 });
 
-const addCardPopup = new PopupWithForm(".modal_type_add-card", "card-form", saveNewCard);
+const addCardPopup = new PopupWithForm(
+  ".modal_type_add-card",
+  "card-form",
+  saveNewCard
+);
 
 addBtn.addEventListener("click", () => {
   addCardPopup.open();
@@ -99,5 +108,3 @@ function createCard(item) {
 function renderCard(cardElement) {
   cardsList.prepend(cardElement);
 }
-
-profileForm.addEventListener("submit", saveProfileChanges);
