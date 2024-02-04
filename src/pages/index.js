@@ -22,10 +22,10 @@ profileFormValidator.enableValidation();
 const cardSection = new Section({items: initialCards, renderer: renderCard}, ".cards__list");
 cardSection.renderItems();
 
-function renderCard(item, targetNode) {
+function renderCard(item) {
   const card = new Card(item, ".card");
   const cardElement = card.generateCard();
-  targetNode.prepend(cardElement);
+  return cardElement;
 }
 
 //creating new cards by filling out the form
