@@ -3,7 +3,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import {initialCards, validationConfig} from "../utils/constants.js";
+import { initialCards, validationConfig } from "../utils/constants.js";
 import "./index.css";
 
 const editBtn = document.querySelector(".explorer__edit-button");
@@ -17,16 +17,25 @@ const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-
 //creating cards from the array
-const cardSection = new Section({items: initialCards, renderer: renderCard}, ".cards__list");
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, ".card");
+      const cardElement = card.generateCard();
+      return cardElement;
+    },
+  },
+  ".cards__list"
+);
 cardSection.renderItems();
 
-function renderCard(item) {
-  const card = new Card(item, ".card");
-  const cardElement = card.generateCard();
-  return cardElement;
-}
+// function renderCard(item) {
+//   const card = new Card(item, ".card");
+//   const cardElement = card.generateCard();
+//   return cardElement;
+// }
 
 //creating new cards by filling out the form
 const saveNewCard = (item) => {
@@ -59,5 +68,5 @@ editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   const currentData = userInfo.getUserInfo();
   profileEditPopup.fillFields(currentData);
-  profileEditPopup.open(); 
+  profileEditPopup.open();
 });
