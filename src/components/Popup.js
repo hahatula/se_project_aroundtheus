@@ -4,7 +4,7 @@ export default class Popup {
     this._modalIsOpenedClassName = "modal_opened";
     this._escPressed = false;
     this._listenerSet = false;
-    this._setEventListeners();
+    this.setEventListeners();
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
@@ -18,7 +18,7 @@ export default class Popup {
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     this._closeModalWindowBtn = this._popup.querySelector(".modal__close-btn");
     this._closeModalWindowBtn.addEventListener("click", () => {
       this.close();

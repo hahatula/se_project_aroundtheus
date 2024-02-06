@@ -38,8 +38,16 @@ cardSection.renderItems();
 // }
 
 //creating new cards by filling out the form
-const saveNewCard = (item) => {
-  cardSection.addItem(item);
+const saveNewCard = () => {
+  console.log(addCardPopup);
+  const name = addCardPopup._form.querySelector(".form__input_title").value;
+  const link = addCardPopup._form.querySelector(
+    ".form__input_image-link"
+  ).value;
+  const newCard = { name, link };
+  cardSection.addItem(newCard);
+  addCardPopup._form.reset();
+  addCardPopup.close();
   addCardFormValidator.disableButton();
 };
 
@@ -54,8 +62,12 @@ addBtn.addEventListener("click", () => {
 });
 
 //cahnging profile details
-function saveProfileChanges({ newName, newAbout }) {
-  userInfo.setUserInfo({ newName, newAbout });
+function saveProfileChanges() {
+  const newName = profileEditPopup._userName.value;
+  const newAbout = profileEditPopup._about.value;
+  const newUserData = { newName, newAbout };
+  userInfo.setUserInfo(newUserData);
+  profileEditPopup.close();
 }
 
 const profileEditPopup = new PopupWithForm(

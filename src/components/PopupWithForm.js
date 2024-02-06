@@ -7,22 +7,7 @@ class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._userName = this._form.querySelector(".form__input_name");
     this._about = this._form.querySelector(".form__input_about");
-    this._formSubmitEventListener();
-  }
-
-  _manageData() {
-    if (this._popup.classList.contains("modal_type_add-card")) {
-      const name = this._form.querySelector(".form__input_title").value;
-      const link = this._form.querySelector(".form__input_image-link").value;
-      const newCard = { name, link };
-      this._handleFormSubmit(newCard);
-      this._form.reset();
-    } else if (this._popup.classList.contains("modal_type_profile")) {
-      const newName = this._userName.value;
-      const newAbout = this._about.value;
-      const newUserData = { newName, newAbout };
-      this._handleFormSubmit(newUserData);
-    }
+    this._setEventListeners();
   }
 
   fillFields(userInfo) {
@@ -30,13 +15,17 @@ class PopupWithForm extends Popup {
     this._about.value = userInfo.currentAbout;
   }
 
-  _formSubmitEventListener() {
-    const eventManageData = this._manageData.bind(this);
+  _setEventListeners() {
+    super.setEventListeners();
+    const handle = this._handleFormSubmit.bind(this);
     this._form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      eventManageData();
-      this.close();
-    });
+        event.preventDefault();
+        handle(this);
+      });
+  }
+
+  resetForm() {
+    this._form.reset();
   }
 }
 
