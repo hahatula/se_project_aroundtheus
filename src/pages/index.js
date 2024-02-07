@@ -31,12 +31,6 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
-// function renderCard(item) {
-//   const card = new Card(item, ".card");
-//   const cardElement = card.generateCard();
-//   return cardElement;
-// }
-
 //creating new cards by filling out the form
 const saveNewCard = () => {
   console.log(addCardPopup);
@@ -63,8 +57,9 @@ addBtn.addEventListener("click", () => {
 
 //cahnging profile details
 function saveProfileChanges() {
-  const newName = profileEditPopup._userName.value;
-  const newAbout = profileEditPopup._about.value;
+  console.log(profileEditPopup._form);
+  const newName = profileEditPopup._form.querySelector(".form__input_name").value;
+  const newAbout = profileEditPopup._form.querySelector(".form__input_about").value;
   const newUserData = { newName, newAbout };
   userInfo.setUserInfo(newUserData);
   profileEditPopup.close();
@@ -79,6 +74,6 @@ const profileEditPopup = new PopupWithForm(
 editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   const currentData = userInfo.getUserInfo();
-  profileEditPopup.fillFields(currentData);
+  profileEditPopup.setInputValues(currentData);
   profileEditPopup.open();
 });

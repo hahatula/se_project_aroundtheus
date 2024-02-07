@@ -5,9 +5,9 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const currentName = this._name.textContent;
-    const currentAbout = this._about.textContent;
-    const userInfo = {currentName, currentAbout};
+    const name = this._name.textContent;
+    const about = this._about.textContent;
+    const userInfo = {name, about};
     return userInfo;
   }
 

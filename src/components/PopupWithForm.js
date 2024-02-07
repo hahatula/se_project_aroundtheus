@@ -5,14 +5,15 @@ class PopupWithForm extends Popup {
     super({ popupSelector });
     this._form = document.forms[formSelector];
     this._handleFormSubmit = handleFormSubmit;
-    this._userName = this._form.querySelector(".form__input_name");
-    this._about = this._form.querySelector(".form__input_about");
+    this._inputList = this._form.querySelectorAll("input");
     this._setEventListeners();
   }
 
-  fillFields(userInfo) {
-    this._userName.value = userInfo.currentName;
-    this._about.value = userInfo.currentAbout;
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+        // here you insert the `value` by the `name` of the input
+        input.value = data[input.name];
+      });
   }
 
   _setEventListeners() {
