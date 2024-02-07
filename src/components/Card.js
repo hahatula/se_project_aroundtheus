@@ -1,10 +1,9 @@
-import PopupWithImage from "./PopupWithImage.js";
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, popupWithImage) {
     this._name = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
+    this._popupWithImage = popupWithImage;
   }
 
   _getTemplate() {
@@ -51,7 +50,6 @@ class Card {
   }
 
   _handleImageClick() {
-    this._popupWithImage = new PopupWithImage(".modal_type_show-image");
     this._popupWithImage.open(this._image, this._name);
   }
 }
