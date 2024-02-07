@@ -2,7 +2,7 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from "../components/PopupWithImage.js"
+import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, validationConfig } from "../utils/constants.js";
 import "./index.css";
@@ -58,8 +58,10 @@ addBtn.addEventListener("click", () => {
 
 //cahnging profile details
 function saveProfileChanges() {
-  const newName = profileEditPopup._form.querySelector(".form__input_name").value;
-  const newAbout = profileEditPopup._form.querySelector(".form__input_about").value;
+  const newName =
+    profileEditPopup._form.querySelector(".form__input_name").value;
+  const newAbout =
+    profileEditPopup._form.querySelector(".form__input_about").value;
   const newUserData = { newName, newAbout };
   userInfo.setUserInfo(newUserData);
   profileEditPopup.close();

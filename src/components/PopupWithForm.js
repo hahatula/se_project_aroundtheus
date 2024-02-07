@@ -11,18 +11,18 @@ class PopupWithForm extends Popup {
 
   setInputValues(data) {
     this._inputList.forEach((input) => {
-        // here you insert the `value` by the `name` of the input
-        input.value = data[input.name];
-      });
+      // here you insert the `value` by the `name` of the input
+      input.value = data[input.name];
+    });
   }
 
   _setEventListeners() {
     super.setEventListeners();
     const handle = this._handleFormSubmit.bind(this);
     this._form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        handle(this);
-      });
+      event.preventDefault();
+      handle(this);
+    });
   }
 
   resetForm() {

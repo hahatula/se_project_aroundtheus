@@ -3,8 +3,8 @@ import Popup from "./Popup.js";
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super({ popupSelector });
-    this._image = this._popup.querySelector('.modal__image');
-    this._imageLable = this._popup.querySelector('.modal__image-lable');
+    this._image = this._popup.querySelector(".modal__image");
+    this._imageLable = this._popup.querySelector(".modal__image-lable");
   }
 
   open(link, name) {

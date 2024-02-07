@@ -33,8 +33,8 @@ export default class Popup {
   }
 
   _handleEscClose(event) {
-      if (event.key === "Escape") {
-        this.close();
-      }
+    if (event.key === "Escape") {
+      this.close();
+    }
   }
 }
