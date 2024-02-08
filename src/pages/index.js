@@ -35,6 +35,7 @@ profileFormValidator.enableValidation();
 
 //creating cards from the array
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
+popupWithImage.setEventListeners();
 const cardSection = new Section(
   {
     items: initialCards,
