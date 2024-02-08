@@ -4,7 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, validationConfig } from "../utils/constants.js";
+import { initialCards, validationConfig, popups } from "../utils/constants.js";
 import "./index.css";
 
 const editBtn = document.querySelector(".explorer__edit-button");
@@ -17,6 +17,21 @@ const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+
+
+//creating popups
+// popups.forEach((popup) => {
+//   console.log(popup);
+//   if (popup.type === "withImage") {
+//     const popupWithImage = new PopupWithImage(popup.selector);
+//     return popupWithImage;
+//   } else if (popup.type === "withForm") {
+//     const popupWithForm = new PopupWithForm (popup.selector, popup.form, popup.handler);
+//     instances[popup.instanceName] = popupWithForm;
+//     console.log(instances[popup.instanceName]);
+//   }
+//   const instanceName = new popups.type(popups.selecctor, popups.form, popups.handler);
+// });
 
 //creating cards from the array
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
@@ -41,7 +56,7 @@ const saveNewCard = () => {
   ).value;
   const newCard = { name, link };
   cardSection.addItem(newCard);
-  addCardPopup._form.reset();
+  addCardPopup.resetForm();
   addCardPopup.close();
   addCardFormValidator.disableButton();
 };
@@ -51,7 +66,7 @@ const addCardPopup = new PopupWithForm(
   "card-form",
   saveNewCard
 );
-
+addCardPopup.setEventListeners();
 addBtn.addEventListener("click", () => {
   addCardPopup.open();
 });
@@ -72,7 +87,7 @@ const profileEditPopup = new PopupWithForm(
   "profile-form",
   saveProfileChanges
 );
-
+profileEditPopup.setEventListeners();
 editBtn.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   const currentData = userInfo.getUserInfo();
