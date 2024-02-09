@@ -33,27 +33,3 @@ export const validationConfig = {
   inputErrorClass: "form__input_type_error",
   errorClass: "form__error-message_active",
 };
-
-// export const popups = [
-//     {
-//         instanceName: "popupWithImage",
-//         type: "withImage",
-//         selector: ".modal_type_show-image",
-//         form: "",
-//         handler: "",
-//     },
-//     {
-//         instanceName: "addCardPopup",
-//         type: "withForm",
-//         selector: ".modal_type_add-card",
-//         form: "card-form",
-//         handler: "saveNewCard",
-//     },
-//     {
-//         instanceName: "profileEditPopup",
-//         type: "withForm",
-//         selector: ".modal_type_profile",
-//         form: "profile-form",
-//         handler: "saveProfileChanges",
-//     },
-// ];

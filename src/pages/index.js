@@ -18,21 +18,6 @@ const profileFormValidator = new FormValidator(validationConfig, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
-
-//creating popups
-// popups.forEach((popup) => {
-//   console.log(popup);
-//   if (popup.type === "withImage") {
-//     const popupWithImage = new PopupWithImage(popup.selector);
-//     return popupWithImage;
-//   } else if (popup.type === "withForm") {
-//     const popupWithForm = new PopupWithForm (popup.selector, popup.form, popup.handler);
-//     instances[popup.instanceName] = popupWithForm;
-//     console.log(instances[popup.instanceName]);
-//   }
-//   const instanceName = new popups.type(popups.selecctor, popups.form, popups.handler);
-// });
-
 //creating cards from the array
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
 popupWithImage.setEventListeners();
@@ -51,11 +36,7 @@ cardSection.renderItems();
 
 //creating new cards by filling out the form
 const saveNewCard = () => {
-  const name = addCardPopup._form.querySelector(".form__input_title").value;
-  const link = addCardPopup._form.querySelector(
-    ".form__input_image-link"
-  ).value;
-  const newCard = { name, link };
+  const newCard = addCardPopup.getInputValues();
   cardSection.addItem(newCard);
   addCardPopup.resetForm();
   addCardPopup.close();
@@ -74,11 +55,7 @@ addBtn.addEventListener("click", () => {
 
 //cahnging profile details
 function saveProfileChanges() {
-  const newName =
-    profileEditPopup._form.querySelector(".form__input_name").value;
-  const newAbout =
-    profileEditPopup._form.querySelector(".form__input_about").value;
-  const newUserData = { newName, newAbout };
+  const newUserData = profileEditPopup.getInputValues();
   userInfo.setUserInfo(newUserData);
   profileEditPopup.close();
 }
