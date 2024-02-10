@@ -35,8 +35,7 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 //creating new cards by filling out the form
-const saveNewCard = () => {
-  const newCard = addCardPopup.getInputValues();
+const saveNewCard = (newCard) => {
   cardSection.addItem(newCard);
   addCardPopup.resetForm();
   addCardPopup.close();
@@ -54,8 +53,7 @@ addBtn.addEventListener("click", () => {
 });
 
 //cahnging profile details
-function saveProfileChanges() {
-  const newUserData = profileEditPopup.getInputValues();
+function saveProfileChanges(newUserData) {
   userInfo.setUserInfo(newUserData);
   profileEditPopup.close();
 }
