@@ -20,12 +20,17 @@ profileFormValidator.enableValidation();
 
 //creating cards from the array
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
+
+const handleImageClick = (card) => {
+  popupWithImage.open(card.link, card.name);
+}
 popupWithImage.setEventListeners();
+
 const cardSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, ".card", popupWithImage);
+      const card = new Card(item, ".card", handleImageClick);
       const cardElement = card.generateCard();
       return cardElement;
     },

@@ -1,9 +1,9 @@
 class Card {
-  constructor(data, cardSelector, popupWithImage) {
-    this._name = data.name;
-    this._image = data.link;
+  constructor(data, cardSelector, handleImageClick) {
+    this.name = data.name;
+    this.link = data.link;
     this._cardSelector = cardSelector;
-    this._popupWithImage = popupWithImage;
+    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -17,9 +17,9 @@ class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector(".card__title-text").textContent = this._name;
-    this._cardImageElement.src = this._image;
-    this._cardImageElement.alt = this._name;
+    this._element.querySelector(".card__title-text").textContent = this.name;
+    this._cardImageElement.src = this.link;
+    this._cardImageElement.alt = this.name;
 
     return this._element;
   }
@@ -47,10 +47,6 @@ class Card {
 
   _handleLikeButton() {
     this._cardLikeButton.classList.toggle("card__fav-icon_active");
-  }
-
-  _handleImageClick() {
-    this._popupWithImage.open(this._image, this._name);
   }
 }
 
