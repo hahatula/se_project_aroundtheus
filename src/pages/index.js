@@ -9,21 +9,32 @@ import "./index.css";
 
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
-const profileForm = document.forms["profile-form"];
-const addCardForm = document.forms["card-form"];
 
 const userInfo = new UserInfo(".explorer__name", ".explorer__description");
-const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
-const profileFormValidator = new FormValidator(validationConfig, profileForm);
-addCardFormValidator.enableValidation();
-profileFormValidator.enableValidation();
+
+// define an object for storing validators
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    // get the name of the form
+    const formName = formElement.getAttribute("name");
+    // store the validator using the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 //creating cards from the array
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
 
 const handleImageClick = (card) => {
   popupWithImage.open(card.link, card.name);
-}
+};
 popupWithImage.setEventListeners();
 
 const cardSection = new Section(
@@ -44,7 +55,7 @@ const saveNewCard = (newCard) => {
   cardSection.addItem(newCard);
   addCardPopup.resetForm();
   addCardPopup.close();
-  addCardFormValidator.disableButton();
+  formValidators["card-form"].disableButton();
 };
 
 const addCardPopup = new PopupWithForm(
@@ -70,7 +81,7 @@ const profileEditPopup = new PopupWithForm(
 );
 profileEditPopup.setEventListeners();
 editBtn.addEventListener("click", () => {
-  profileFormValidator.resetValidation();
+  formValidators["profile-form"].resetValidation();
   const currentData = userInfo.getUserInfo();
   profileEditPopup.setInputValues(currentData);
   profileEditPopup.open();
