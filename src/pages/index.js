@@ -6,11 +6,22 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, validationConfig, popups } from "../utils/constants.js";
 import "./index.css";
+import Api from "../components/Api.js"
 
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
 
 const userInfo = new UserInfo(".explorer__name", ".explorer__description");
+
+//api
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1", 
+  headers: {
+    authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f"
+  }
+});
+console.log(api);
 
 // define an object for storing validators
 const formValidators = {};
