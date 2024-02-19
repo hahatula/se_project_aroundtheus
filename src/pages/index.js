@@ -26,6 +26,7 @@ api.getUserInfo()
     const user = new UserInfo(".explorer__name", ".explorer__description");
     console.log(user);
     user.setUserInfo({ name: userInfo.name, about: userInfo.about });
+    return user;
   })
   .catch((err) => console.error(err));
 
