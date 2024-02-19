@@ -6,22 +6,31 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, validationConfig, popups } from "../utils/constants.js";
 import "./index.css";
-import Api from "../components/Api.js"
+import Api from "../components/Api.js";
 
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
 
-const userInfo = new UserInfo(".explorer__name", ".explorer__description");
-
 //api
 
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1", 
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f"
-  }
+    authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+  },
 });
-console.log(api);
+
+api.getUserInfo()
+  .then(userInfo => {
+    console.log(userInfo);
+    const user = new UserInfo(".explorer__name", ".explorer__description");
+    console.log(user);
+    user.setUserInfo({ name: userInfo.name, about: userInfo.about });
+  })
+  .catch((err) => console.error(err));
+
+
+api.getInitialCards();
 
 // define an object for storing validators
 const formValidators = {};
@@ -81,7 +90,7 @@ addBtn.addEventListener("click", () => {
 
 //cahnging profile details
 function saveProfileChanges(newUserData) {
-  userInfo.setUserInfo(newUserData);
+  user.setUserInfo(newUserData);
   profileEditPopup.close();
 }
 
@@ -93,7 +102,7 @@ const profileEditPopup = new PopupWithForm(
 profileEditPopup.setEventListeners();
 editBtn.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
-  const currentData = userInfo.getUserInfo();
+  const currentData = user.getUserInfo();
   profileEditPopup.setInputValues(currentData);
   profileEditPopup.open();
 });
