@@ -48,6 +48,7 @@ api.getUserInfo()
     //cahnging user details
     function saveProfileChanges(newUserData) {
       user.setUserInfo(newUserData);
+      api.patchUserInfo(newUserData);
       profileEditPopup.close();
     }
     

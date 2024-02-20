@@ -27,6 +27,20 @@ export default class Api {
       });
   }
 
+  patchUserInfo({ name, about }) {
+    fetch(`${this._baseUrl}` + `/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    });
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}` + `/cards`, {
       headers: {
