@@ -35,8 +35,9 @@ export default class Api {
       },
     })
       .then(this.checkResponse)
-      .then((result) => {
-        console.log(result);
+      .then((cards) => {
+        console.log(cards);
+        return cards;
       })
       .catch((err) => {
         console.error(err); // log the error to the console
