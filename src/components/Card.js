@@ -41,6 +41,7 @@ class Card {
   }
 
   _handleDeleteButton() {
+    //open popup to confirm
     this._element.remove();
     this._element = null; //remove the link to the DOM element after deleting a card. It helps javascript garbage collector.
   }
