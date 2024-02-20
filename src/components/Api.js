@@ -38,7 +38,10 @@ export default class Api {
         name: name,
         about: about,
       }),
-    });
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
+    });;
   }
 
   getInitialCards() {
@@ -56,5 +59,22 @@ export default class Api {
       .catch((err) => {
         console.error(err); // log the error to the console
       });
+  }
+
+  postCard({name, link}) {
+    fetch(`${this._baseUrl}` + `/cards`, {
+      method: "POST",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
+    });;
   }
 }

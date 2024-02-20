@@ -88,6 +88,7 @@ api.getUserInfo()
     .then(cardSection => {
       const saveNewCard = (newCard) => {
         cardSection.addItem(newCard);
+        api.postCard(newCard);
         addCardPopup.resetForm();
         addCardPopup.close();
         formValidators["card-form"].disableButton();
