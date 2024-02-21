@@ -1,7 +1,7 @@
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
@@ -38,21 +38,22 @@ const api = new Api({
 });
 
 //user
-api.getUserInfo()
-  .then(userInfo => {
+api
+  .getUserInfo()
+  .then((userInfo) => {
     //set user info
     const user = new UserInfo(".explorer__name", ".explorer__description");
     user.setUserInfo({ name: userInfo.name, about: userInfo.about });
     return user;
   })
-  .then(user => {
+  .then((user) => {
     //cahnging user details
     function saveProfileChanges(newUserData) {
       user.setUserInfo(newUserData);
       api.patchUserInfo(newUserData);
       profileEditPopup.close();
     }
-    
+
     const profileEditPopup = new PopupWithForm(
       ".modal_type_profile",
       "profile-form",
@@ -68,15 +69,20 @@ api.getUserInfo()
   })
   .catch((err) => console.error(err));
 
-
-  api.getInitialCards()
-    .then (cards => {
+api
+  .getInitialCards()
+  .then((cards) => {
     //creating initial cards
     const cardSection = new Section(
       {
         items: cards,
         renderer: (item) => {
-          const card = new Card(item, ".card", handleImageClick);
+          const card = new Card(
+            item,
+            ".card",
+            handleImageClick,
+            handleDeleteButton
+          );
           const cardElement = card.generateCard();
           return cardElement;
         },
@@ -86,27 +92,26 @@ api.getUserInfo()
     cardSection.renderItems();
     return cardSection;
   })
-    .then(cardSection => {
-      const saveNewCard = (newCard) => {
-        cardSection.addItem(newCard);
-        api.postCard(newCard);
-        addCardPopup.resetForm();
-        addCardPopup.close();
-        formValidators["card-form"].disableButton();
-      };
-      
-      const addCardPopup = new PopupWithForm(
-        ".modal_type_add-card",
-        "card-form",
-        saveNewCard
-      );
-      addCardPopup.setEventListeners();
-      addBtn.addEventListener("click", () => {
-        addCardPopup.open();
-      });
-    })
-    .catch((err) => console.error(err));;
+  .then((cardSection) => {
+    const saveNewCard = (newCard) => {
+      cardSection.addItem(newCard);
+      api.postCard(newCard);
+      addCardPopup.resetForm();
+      addCardPopup.close();
+      formValidators["card-form"].disableButton();
+    };
 
+    const addCardPopup = new PopupWithForm(
+      ".modal_type_add-card",
+      "card-form",
+      saveNewCard
+    );
+    addCardPopup.setEventListeners();
+    addBtn.addEventListener("click", () => {
+      addCardPopup.open();
+    });
+  })
+  .catch((err) => console.error(err));
 
 //handle card popups
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
@@ -115,6 +120,8 @@ const handleImageClick = (card) => {
 };
 popupWithImage.setEventListeners();
 
-const popupConfirmDelete = new Popup({popupSelector: ".modal_type_delete"});
-console.log(popupConfirmDelete);
-popupConfirmDelete.open();
+const popupConfirmDelete = new PopupConfirmation(".modal_type_confirm");
+popupConfirmDelete.setEventListeners();
+const handleDeleteButton = (card) => {
+  popupConfirmDelete.open(card);
+};
