@@ -69,6 +69,21 @@ api
   })
   .catch((err) => console.error(err));
 
+
+
+  const handleDeleteButton = (card) => {
+    console.log(card);
+    popupConfirmDelete.open(card);
+  };
+
+  const handleDeleteConfirm = (card) => {
+    console.log(card);
+    card.handleDeleteConfirm();
+    //   //deleteFromServer(this._id)
+    popupConfirmDelete.close();
+    api.deleteCard(card._id);
+  };
+  
 api
   .getInitialCards()
   .then((cards) => {
@@ -120,8 +135,9 @@ const handleImageClick = (card) => {
 };
 popupWithImage.setEventListeners();
 
-const popupConfirmDelete = new PopupConfirmation(".modal_type_confirm");
+
+const popupConfirmDelete = new PopupConfirmation(".modal_type_confirm", handleDeleteConfirm);
 popupConfirmDelete.setEventListeners();
-const handleDeleteButton = (card) => {
-  popupConfirmDelete.open(card);
-};
+
+
+

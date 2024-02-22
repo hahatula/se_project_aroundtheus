@@ -2,6 +2,7 @@ class Card {
   constructor(data, cardSelector, handleImageClick, handleDeleteButton) {
     this.name = data.name;
     this.link = data.link;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteButton = handleDeleteButton;
@@ -34,7 +35,7 @@ class Card {
       this._handleLikeButton();
     });
     this._cardDeleteButton.addEventListener("click", () => {
-      this._handleDeleteButton(this._element);
+      this._handleDeleteButton(this);
     });
     this._cardImageElement.addEventListener("click", () => {
       this._handleImageClick(this);
@@ -43,6 +44,11 @@ class Card {
 
   _handleLikeButton() {
     this._cardLikeButton.classList.toggle("card__fav-icon_active");
+  }
+
+  handleDeleteConfirm() {
+    this._element.remove();
+    this._element = null; //remove the link to the DOM element after deleting a card. It helps javascript garbage collector.
   }
 }
 

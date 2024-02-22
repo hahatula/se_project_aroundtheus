@@ -1,26 +1,23 @@
 import Popup from "./Popup.js";
 
 class PopupConfirmation extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, handleConfirm) {
     super({ popupSelector });
     this._btn = this._popup.querySelector(".modal__confirm-btn");
+    this._handleConfirm = handleConfirm;
   }
 
-  open(element) {
-    this._element = element;
+  open(target) {
+    this._target = target;
     super.open();
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._btn.addEventListener("click", this._deleteElement.bind(this));
+    this._btn.addEventListener("click", () => {
+      this._handleConfirm(this._target);
+    });
     //we can add other confirmations here
-  }
-
-  _deleteElement() {
-    this._element.remove();
-    this._element = null; //remove the link to the DOM element after deleting a card. It helps javascript garbage collector.
-    super.close();
   }
 }
 

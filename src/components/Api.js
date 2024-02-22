@@ -75,6 +75,15 @@ export default class Api {
     })
     .catch((err) => {
       console.error(err); // log the error to the console
-    });;
+    });
+  }
+
+  deleteCard(id) {
+    fetch(`${this._baseUrl}` + `/cards/` + `${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+      },
+    })
   }
 }
