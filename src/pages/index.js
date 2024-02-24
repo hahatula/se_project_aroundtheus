@@ -52,21 +52,25 @@ api
       name: userInfo.name,
       about: userInfo.about,
     });
-    user.setAvatar({ avatar: userInfo.avatar })
+    user.setAvatar({ avatar: userInfo.avatar });
     return user;
   })
   .then((user) => {
     //cahnging user details
     function saveProfileChanges(newUserData) {
+      profileEditPopup.savingDisplay(true);
       user.setUserInfo(newUserData);
-      api.patchUserInfo(newUserData);
-      profileEditPopup.close();
+      api.patchUserInfo(newUserData).then(() => {
+        profileEditPopup.close();
+        profileEditPopup.savingDisplay(false);
+      });
     }
 
     const profileEditPopup = new PopupWithForm(
       ".modal_type_profile",
       "profile-form",
-      saveProfileChanges
+      saveProfileChanges,
+      "Save"
     );
     profileEditPopup.setEventListeners();
     editBtn.addEventListener("click", () => {
@@ -77,23 +81,26 @@ api
     });
 
     function saveAvatar(newAvatar) {
-      console.log(newAvatar);
+      changeAvatarPopup.savingDisplay(true);
       user.setAvatar(newAvatar);
-      api.patchAvatar(newAvatar);
-      changeAvatarPopup.resetForm();
-      changeAvatarPopup.close();
-      formValidators["avatar-form"].disableButton();
+      api.patchAvatar(newAvatar).then(() => {
+        changeAvatarPopup.resetForm();
+        changeAvatarPopup.close();
+        changeAvatarPopup.savingDisplay(false);
+        formValidators["avatar-form"].disableButton();
+      });
     }
 
     const changeAvatarPopup = new PopupWithForm(
       ".modal_type_avatar",
       "avatar-form",
-      saveAvatar
+      saveAvatar,
+      "Save"
     );
     changeAvatarPopup.setEventListeners();
     avatarChangeBtn.addEventListener("click", () => {
       changeAvatarPopup.open();
-    } )
+    });
   })
   .catch((err) => console.error(err));
 
@@ -140,17 +147,21 @@ api
   })
   .then((cardSection) => {
     const saveNewCard = (newCard) => {
+      addCardPopup.savingDisplay(true);
       cardSection.addItem(newCard);
-      api.postCard(newCard);
-      addCardPopup.resetForm();
-      addCardPopup.close();
-      formValidators["card-form"].disableButton();
+      api.postCard(newCard).then(() => {
+        addCardPopup.resetForm();
+        addCardPopup.close();
+        addCardPopup.savingDisplay(false);
+        formValidators["card-form"].disableButton();
+      });
     };
 
     const addCardPopup = new PopupWithForm(
       ".modal_type_add-card",
       "card-form",
-      saveNewCard
+      saveNewCard,
+      "Create"
     );
     addCardPopup.setEventListeners();
     addBtn.addEventListener("click", () => {

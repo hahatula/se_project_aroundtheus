@@ -28,7 +28,7 @@ export default class Api {
   }
 
   patchUserInfo({ name, about }) {
-    fetch(`${this._baseUrl}` + `/users/me`, {
+    return fetch(`${this._baseUrl}` + `/users/me`, {
       method: "PATCH",
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
@@ -38,13 +38,14 @@ export default class Api {
         name: name,
         about: about,
       }),
-    }).catch((err) => {
+    })
+    .catch((err) => {
       console.error(err); // log the error to the console
     });
   }
 
   patchAvatar({ avatar }) {
-    fetch(`${this._baseUrl}` + `/users/me/avatar`, {
+    return fetch(`${this._baseUrl}` + `/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
@@ -76,7 +77,7 @@ export default class Api {
   }
 
   postCard({ name, link }) {
-    fetch(`${this._baseUrl}` + `/cards`, {
+    return fetch(`${this._baseUrl}` + `/cards`, {
       method: "POST",
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
