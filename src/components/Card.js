@@ -41,7 +41,6 @@ class Card {
     this._cardImageElement = this._element.querySelector(".card__image");
 
     this._cardLikeButton.addEventListener("click", () => {
-      
       this._handleLikeButton(this);
       this._toggleLikeIcon();
     });
@@ -61,7 +60,6 @@ class Card {
 
   _toggleLikeIcon() {
     this._cardLikeButton.classList.toggle("card__fav-icon_active");
-    // this.isLiked = !this.isLiked;
   }
 
   handleDeleteConfirm() {

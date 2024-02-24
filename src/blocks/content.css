@@ -1,5 +1,6 @@
 .content {
   max-width: 880px;
+  min-height: calc(100vh - 222px);
   margin: 0 auto;
 }
 
