@@ -105,7 +105,6 @@ api
   .catch((err) => console.error(err));
 
 const handleDeleteButton = (card) => {
-  console.log(card);
   popupConfirmDelete.open(card);
 };
 

@@ -39,9 +39,10 @@ export default class Api {
         about: about,
       }),
     })
-    .catch((err) => {
-      console.error(err); // log the error to the console
-    });
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 
   patchAvatar({ avatar }) {
@@ -54,9 +55,11 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    }).catch((err) => {
-      console.error(err); // log the error to the console
-    });
+    })
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 
   getInitialCards() {
@@ -68,7 +71,6 @@ export default class Api {
     })
       .then(this.checkResponse)
       .then((cards) => {
-        console.log(cards);
         return cards;
       })
       .catch((err) => {
@@ -87,9 +89,11 @@ export default class Api {
         name: name,
         link: link,
       }),
-    }).catch((err) => {
-      console.error(err); // log the error to the console
-    });
+    })
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 
   deleteCard(id) {
@@ -98,7 +102,11 @@ export default class Api {
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
       },
-    });
+    })
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 
   setLike(id) {
@@ -110,7 +118,11 @@ export default class Api {
       body: JSON.stringify({
         isLiked: true,
       }),
-    });
+    })
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 
   removeLike(id) {
@@ -119,6 +131,10 @@ export default class Api {
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
       },
-    });
+    })
+      .then(this.checkResponse)
+      .catch((err) => {
+        console.error(err); // log the error to the console
+      });
   }
 }
