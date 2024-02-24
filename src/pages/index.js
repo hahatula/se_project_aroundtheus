@@ -5,7 +5,7 @@ import PopupConfirmation from "../components/PopupConfirmation.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, validationConfig, popups } from "../utils/constants.js";
+import { validationConfig } from "../utils/constants.js";
 import "./index.css";
 import Api from "../components/Api.js";
 
@@ -42,8 +42,8 @@ api
   .getUserInfo()
   .then((userInfo) => {
     //set user info
-    const user = new UserInfo(".explorer__name", ".explorer__description");
-    user.setUserInfo({ name: userInfo.name, about: userInfo.about });
+    const user = new UserInfo(".explorer__name", ".explorer__description", ".explorer__photo");
+    user.setUserInfo({ name: userInfo.name, about: userInfo.about, avatar: userInfo.avatar });
     return user;
   })
   .then((user) => {
