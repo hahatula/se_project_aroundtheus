@@ -11,6 +11,7 @@ import Api from "../components/Api.js";
 
 const editBtn = document.querySelector(".explorer__edit-button");
 const addBtn = document.querySelector(".explorer__add-button");
+const avatarChangeBtn = document.querySelector(".explorer__photo-overlay");
 
 // define an object for storing validators
 const formValidators = {};
@@ -42,8 +43,16 @@ api
   .getUserInfo()
   .then((userInfo) => {
     //set user info
-    const user = new UserInfo(".explorer__name", ".explorer__description", ".explorer__photo");
-    user.setUserInfo({ name: userInfo.name, about: userInfo.about, avatar: userInfo.avatar });
+    const user = new UserInfo(
+      ".explorer__name",
+      ".explorer__description",
+      ".explorer__photo"
+    );
+    user.setUserInfo({
+      name: userInfo.name,
+      about: userInfo.about,
+    });
+    user.setAvatar({ avatar: userInfo.avatar })
     return user;
   })
   .then((user) => {
@@ -66,28 +75,45 @@ api
       profileEditPopup.setInputValues(currentData);
       profileEditPopup.open();
     });
+
+    function saveAvatar(newAvatar) {
+      console.log(newAvatar);
+      user.setAvatar(newAvatar);
+      api.patchAvatar(newAvatar);
+      changeAvatarPopup.resetForm();
+      changeAvatarPopup.close();
+      formValidators["avatar-form"].disableButton();
+    }
+
+    const changeAvatarPopup = new PopupWithForm(
+      ".modal_type_avatar",
+      "avatar-form",
+      saveAvatar
+    );
+    changeAvatarPopup.setEventListeners();
+    avatarChangeBtn.addEventListener("click", () => {
+      changeAvatarPopup.open();
+    } )
   })
   .catch((err) => console.error(err));
 
+const handleDeleteButton = (card) => {
+  console.log(card);
+  popupConfirmDelete.open(card);
+};
 
+const handleDeleteConfirm = (card) => {
+  card.handleDeleteConfirm();
+  //   //deleteFromServer(this._id)
+  popupConfirmDelete.close();
+  api.deleteCard(card._id);
+};
 
-  const handleDeleteButton = (card) => {
-    console.log(card);
-    popupConfirmDelete.open(card);
-  };
+const handleLikeButton = (card) => {
+  card.isLiked === false ? api.setLike(card._id) : api.removeLike(card._id);
+  card.isLiked = !card.isLiked;
+};
 
-  const handleDeleteConfirm = (card) => {
-    card.handleDeleteConfirm();
-    //   //deleteFromServer(this._id)
-    popupConfirmDelete.close();
-    api.deleteCard(card._id);
-  };
-
-  const handleLikeButton = (card) => {
-    card.isLiked === false ? api.setLike(card._id) : api.removeLike(card._id);
-    card.isLiked = !card.isLiked;
-  }
-  
 api
   .getInitialCards()
   .then((cards) => {
@@ -140,9 +166,8 @@ const handleImageClick = (card) => {
 };
 popupWithImage.setEventListeners();
 
-
-const popupConfirmDelete = new PopupConfirmation(".modal_type_confirm", handleDeleteConfirm);
+const popupConfirmDelete = new PopupConfirmation(
+  ".modal_type_confirm",
+  handleDeleteConfirm
+);
 popupConfirmDelete.setEventListeners();
-
-
-

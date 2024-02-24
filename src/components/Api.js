@@ -43,6 +43,21 @@ export default class Api {
     });
   }
 
+  patchAvatar({ avatar }) {
+    fetch(`${this._baseUrl}` + `/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).catch((err) => {
+      console.error(err); // log the error to the console
+    });
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}` + `/cards`, {
       headers: {
