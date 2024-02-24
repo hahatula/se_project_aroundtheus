@@ -38,10 +38,9 @@ export default class Api {
         name: name,
         about: about,
       }),
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.error(err); // log the error to the console
-    });;
+    });
   }
 
   getInitialCards() {
@@ -61,7 +60,7 @@ export default class Api {
       });
   }
 
-  postCard({name, link}) {
+  postCard({ name, link }) {
     fetch(`${this._baseUrl}` + `/cards`, {
       method: "POST",
       headers: {
@@ -72,8 +71,7 @@ export default class Api {
         name: name,
         link: link,
       }),
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.error(err); // log the error to the console
     });
   }
@@ -84,6 +82,27 @@ export default class Api {
       headers: {
         authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
       },
-    })
+    });
+  }
+
+  setLike(id) {
+    fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+      },
+      body: JSON.stringify({
+        isLiked: true,
+      }),
+    });
+  }
+
+  removeLike(id) {
+    fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+      },
+    });
   }
 }

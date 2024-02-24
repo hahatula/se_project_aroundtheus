@@ -77,12 +77,16 @@ api
   };
 
   const handleDeleteConfirm = (card) => {
-    console.log(card);
     card.handleDeleteConfirm();
     //   //deleteFromServer(this._id)
     popupConfirmDelete.close();
     api.deleteCard(card._id);
   };
+
+  const handleLikeButton = (card) => {
+    card.isLiked === false ? api.setLike(card._id) : api.removeLike(card._id);
+    card.isLiked = !card.isLiked;
+  }
   
 api
   .getInitialCards()
@@ -96,7 +100,8 @@ api
             item,
             ".card",
             handleImageClick,
-            handleDeleteButton
+            handleDeleteButton,
+            handleLikeButton
           );
           const cardElement = card.generateCard();
           return cardElement;
