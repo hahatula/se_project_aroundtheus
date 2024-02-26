@@ -78,7 +78,7 @@ export default class Api {
       });
   }
 
-  postCard({ name, link }) {
+  postCard(card) {
     return fetch(`${this._baseUrl}` + `/cards`, {
       method: "POST",
       headers: {
@@ -86,11 +86,14 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name: card.name,
+        link: card.link,
       }),
     })
       .then(this.checkResponse)
+      .then((card) => {
+        return card;
+      })
       .catch((err) => {
         console.error(err); // log the error to the console
       });

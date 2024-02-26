@@ -110,7 +110,6 @@ const handleDeleteButton = (card) => {
 
 const handleDeleteConfirm = (card) => {
   card.handleDeleteConfirm();
-  //   //deleteFromServer(this._id)
   popupConfirmDelete.close();
   api.deleteCard(card._id);
 };
@@ -120,11 +119,12 @@ const handleLikeButton = (card) => {
   card.isLiked = !card.isLiked;
 };
 
+let cardSection;
 api
   .getInitialCards()
   .then((cards) => {
     //creating initial cards
-    const cardSection = new Section(
+    cardSection = new Section(
       {
         items: cards,
         renderer: (item) => {
@@ -142,32 +142,33 @@ api
       ".cards__list"
     );
     cardSection.renderItems();
-    return cardSection;
-  })
-  .then((cardSection) => {
-    const saveNewCard = (newCard) => {
-      addCardPopup.savingDisplay(true);
-      cardSection.addItem(newCard);
-      api.postCard(newCard).then(() => {
-        addCardPopup.resetForm();
-        addCardPopup.close();
-        addCardPopup.savingDisplay(false);
-        formValidators["card-form"].disableButton();
-      });
-    };
-
-    const addCardPopup = new PopupWithForm(
-      ".modal_type_add-card",
-      "card-form",
-      saveNewCard,
-      "Create"
-    );
-    addCardPopup.setEventListeners();
-    addBtn.addEventListener("click", () => {
-      addCardPopup.open();
-    });
   })
   .catch((err) => console.error(err));
+
+const saveNewCard = (newCard) => {
+  addCardPopup.savingDisplay(true);
+  api.postCard(newCard).then((card) => {
+    console.log(card);
+    console.log(newCard);
+    cardSection.addItem(card);
+    addCardPopup.resetForm();
+    addCardPopup.close();
+    addCardPopup.savingDisplay(false);
+    formValidators["card-form"].disableButton();
+  })
+  .catch((err) => console.error(err));
+};
+
+const addCardPopup = new PopupWithForm(
+  ".modal_type_add-card",
+  "card-form",
+  saveNewCard,
+  "Create"
+);
+addCardPopup.setEventListeners();
+addBtn.addEventListener("click", () => {
+  addCardPopup.open();
+});
 
 //handle card popups
 const popupWithImage = new PopupWithImage(".modal_type_show-image");
