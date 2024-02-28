@@ -13,78 +13,49 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}` + `/users/me`, {
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     })
       .then(this.checkResponse)
       .then((userInfo) => {
         return userInfo;
-      })
-      .catch((err) => {
-        console.error(err); // log the error to the console
       });
   }
 
   patchUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}` + `/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about,
       }),
-    })
-      .then(this.checkResponse)
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+    }).then(this.checkResponse);
   }
 
   patchAvatar({ avatar }) {
     return fetch(`${this._baseUrl}` + `/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then(this.checkResponse)
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+    }).then(this.checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}` + `/cards`, {
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     })
       .then(this.checkResponse)
       .then((cards) => {
         return cards;
-      })
-      .catch((err) => {
-        console.error(err); // log the error to the console
       });
   }
 
   postCard(card) {
     return fetch(`${this._baseUrl}` + `/cards`, {
       method: "POST",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -93,51 +64,30 @@ export default class Api {
       .then(this.checkResponse)
       .then((card) => {
         return card;
-      })
-      .catch((err) => {
-        console.error(err); // log the error to the console
       });
   }
 
   deleteCard(id) {
-    fetch(`${this._baseUrl}` + `/cards/` + `${id}`, {
+    return fetch(`${this._baseUrl}` + `/cards/` + `${id}`, {
       method: "DELETE",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-      },
-    })
-      .then(this.checkResponse)
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+      headers: this._headers,
+    }).then(this.checkResponse);
   }
 
   setLike(id) {
-    fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
+    return fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
       method: "PUT",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         isLiked: true,
       }),
-    })
-      .then(this.checkResponse)
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+    }).then(this.checkResponse);
   }
 
   removeLike(id) {
-    fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
+    return fetch(`${this._baseUrl}` + `/cards/` + `${id}` + `/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
-      },
-    })
-      .then(this.checkResponse)
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+      headers: this._headers,
+    }).then(this.checkResponse);
   }
 }

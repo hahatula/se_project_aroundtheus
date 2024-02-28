@@ -35,6 +35,7 @@ const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "9e620f98-b2bc-4f4a-81bd-341fb1cf797f",
+    "Content-Type": "application/json",
   },
 });
 
@@ -59,11 +60,18 @@ api
     //cahnging user details
     function saveProfileChanges(newUserData) {
       profileEditPopup.savingDisplay(true);
-      user.setUserInfo(newUserData);
-      api.patchUserInfo(newUserData).then(() => {
-        profileEditPopup.close();
-        profileEditPopup.savingDisplay(false);
-      });
+      api
+        .patchUserInfo(newUserData)
+        .then(() => {
+          user.setUserInfo(newUserData);
+          profileEditPopup.close();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          profileEditPopup.savingDisplay(false);
+        });
     }
 
     const profileEditPopup = new PopupWithForm(
@@ -82,13 +90,20 @@ api
 
     function saveAvatar(newAvatar) {
       changeAvatarPopup.savingDisplay(true);
-      user.setAvatar(newAvatar);
-      api.patchAvatar(newAvatar).then(() => {
-        changeAvatarPopup.resetForm();
-        changeAvatarPopup.close();
-        changeAvatarPopup.savingDisplay(false);
-        formValidators["avatar-form"].disableButton();
-      });
+      api
+        .patchAvatar(newAvatar)
+        .then(() => {
+          user.setAvatar(newAvatar);
+          changeAvatarPopup.resetForm();
+          changeAvatarPopup.close();
+          formValidators["avatar-form"].disableButton();
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          changeAvatarPopup.savingDisplay(false);
+        });
     }
 
     const changeAvatarPopup = new PopupWithForm(
@@ -109,14 +124,23 @@ const handleDeleteButton = (card) => {
 };
 
 const handleDeleteConfirm = (card) => {
-  card.handleDeleteConfirm();
-  popupConfirmDelete.close();
-  api.deleteCard(card._id);
+  api
+    .deleteCard(card._id)
+    .then(() => {
+      card.handleDeleteConfirm();
+      popupConfirmDelete.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 const handleLikeButton = (card) => {
-  card.isLiked === false ? api.setLike(card._id) : api.removeLike(card._id);
-  card.isLiked = !card.isLiked;
+  if (card.isLiked === false) {
+    return api.setLike(card._id);
+  } else {
+    return api.removeLike(card._id);
+  }
 };
 
 let cardSection;
@@ -147,16 +171,18 @@ api
 
 const saveNewCard = (newCard) => {
   addCardPopup.savingDisplay(true);
-  api.postCard(newCard).then((card) => {
-    console.log(card);
-    console.log(newCard);
-    cardSection.addItem(card);
-    addCardPopup.resetForm();
-    addCardPopup.close();
-    addCardPopup.savingDisplay(false);
-    formValidators["card-form"].disableButton();
-  })
-  .catch((err) => console.error(err));
+  api
+    .postCard(newCard)
+    .then((card) => {
+      cardSection.addItem(card);
+      addCardPopup.close();
+      addCardPopup.resetForm();
+      formValidators["card-form"].disableButton();
+    })
+    .catch((err) => console.error(err))
+    .finally(() => {
+      addCardPopup.savingDisplay(false);
+    });
 };
 
 const addCardPopup = new PopupWithForm(
