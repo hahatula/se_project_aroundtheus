@@ -20,21 +20,24 @@
       </header>
       <main class="content">
         <section class="explorer">
-          <img
-            class="explorer__photo"
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Profile image"
-          />
+          <div class="explorer__photo-wrapper">
+            <div class="explorer__photo-overlay"></div>
+            <img
+              class="explorer__photo"
+              src=" "
+              alt="Profile image"
+            />
+          </div>
           <div class="explorer__info">
             <div class="explorer__name-wrapper">
-              <h1 class="explorer__name">Jacques Cousteau</h1>
+              <h1 class="explorer__name"></h1>
               <button
                 aria-label="Edit profile"
                 type="button"
                 class="explorer__edit-button"
               ></button>
             </div>
-            <p class="explorer__description">Explorer</p>
+            <p class="explorer__description"></p>
           </div>
           <button
             aria-label="Add new"
@@ -96,9 +99,34 @@
               <span class="form__error-message about-error-message"></span>
             </label>
           </fieldset>
-          <button class="form__submit form__submit_disabled" type="submit">
-            Save
-          </button>
+          <button class="form__submit form__submit_disabled" type="submit"></button>
+        </form>
+        <button
+          class="modal__close-btn"
+          type="button"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+
+    <div class="modal modal_type_avatar">
+      <div class="modal__container">
+        <form class="modal__form form" name="avatar-form" novalidate>
+          <h2 class="form__title">Change profile picture</h2>
+          <fieldset class="form__fieldset">
+            <label class="form__field">
+              <input
+                id="link"
+                class="form__input form__input_avatar"
+                name="avatar"
+                type="url"
+                placeholder="Image link"
+                required
+              />
+              <span class="form__error-message link-error-message"></span>
+            </label>
+          </fieldset>
+          <button class="form__submit form__submit_disabled" type="submit"></button>
         </form>
         <button
           class="modal__close-btn"
@@ -114,13 +142,14 @@
           <h2 class="form__title">New place</h2>
           <fieldset class="form__fieldset">
             <label class="form__field">
+              <!-- changed minlength as the server requeres length 2 -->
               <input
                 id="card-name"
                 class="form__input form__input_title"
                 name="name"
                 type="text"
                 placeholder="Title"
-                minlength="1"
+                minlength="2"
                 maxlength="30"
                 required
               />
@@ -138,9 +167,7 @@
               <span class="form__error-message link-error-message"></span>
             </label>
           </fieldset>
-          <button class="form__submit form__submit_disabled" type="submit">
-            Create
-          </button>
+          <button class="form__submit form__submit_disabled" type="submit"></button>
         </form>
         <button
           class="modal__close-btn"
@@ -154,6 +181,20 @@
       <div class="modal__image-wrapper">
         <img class="modal__image" src="#" alt="" />
         <p class="modal__image-lable"></p>
+        <button
+          class="modal__close-btn"
+          type="button"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+
+    <div class="modal modal_type_confirm">
+      <div class="modal__container">
+        <div class="modal__no-form">
+          <h2 class="modal__title">Are you sure?</h2>
+          <button class="modal__confirm-btn" type="button">Yes</button>
+        </div>
         <button
           class="modal__close-btn"
           type="button"

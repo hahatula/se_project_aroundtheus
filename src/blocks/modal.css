@@ -33,6 +33,34 @@
   position: relative;
 }
 
+.modal__no-form {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.modal__title {
+  font-weight: 900;
+  font-size: 24px;
+  margin: 0;
+  line-height: 36px;
+}
+
+.modal__confirm-btn {
+  font-size: 18px;
+  color: #fff;
+  background-color: #000;
+  border-style: none;
+  border-radius: 2px;
+  padding: 18px;
+  transition: opacity linear 0.3s;
+}
+
+.modal__confirm-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .modal__image-wrapper {
   max-width: 75vw;
   max-height: 75vh;
